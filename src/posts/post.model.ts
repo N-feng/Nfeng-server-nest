@@ -1,4 +1,4 @@
-import { getModelForClass, prop } from '@typegoose/typegoose'
+import { prop } from '@typegoose/typegoose'
 
 export class Post {
   @prop()
@@ -6,6 +6,3 @@ export class Post {
   @prop()
   content: string
 }
-
-
-export const PostModel = getModelForClass(Post)
