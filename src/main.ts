@@ -13,8 +13,8 @@ async function bootstrap() {
 
 
   const options = new DocumentBuilder()
-    .setTitle('NestJs博客API')
-    .setDescription('我的第一个NestJs项目')
+    .setTitle('nfeng-backend-nest')
+    .setDescription('my first NestJs project')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, options);
