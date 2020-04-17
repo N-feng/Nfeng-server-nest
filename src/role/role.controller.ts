@@ -5,7 +5,7 @@ import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from '@typegoose/typegoose/lib/types';
 import { Role as RoleSchema } from './role.model';
 
-class CreatePostDto {
+class CreateRoleDto {
   @ApiPropertyOptional({ description: '角色名称', example: '销售部门' })
   @IsNotEmpty({ message: '请填写角色名称' })
   title: string
@@ -22,15 +22,15 @@ export class RoleController {
   ) {}
 
   @Get()
-  @ApiOperation({ summary: '显示角色列表' })
+  @ApiOperation({ summary: '角色列表' })
   async index() {
     return await this.roleModel.find()
   }
 
   @Post()
   @ApiOperation({ summary: '创建角色' })
-  async create(@Body() createPostDto: CreatePostDto) {
-    await this.roleModel.create(createPostDto)
+  async create(@Body() CreateRoleDto: CreateRoleDto) {
+    await this.roleModel.create(CreateRoleDto)
     return {
       success: true
     }
@@ -38,7 +38,7 @@ export class RoleController {
 
   @Put(':id')
   @ApiOperation({ summary: '编辑角色' })
-  async update(@Param('id') id: string, @Body() updateRoleDto: CreatePostDto) {
+  async update(@Param('id') id: string, @Body() updateRoleDto: CreateRoleDto) {
     await this.roleModel.findByIdAndUpdate(id, updateRoleDto)
     return {
       success: true

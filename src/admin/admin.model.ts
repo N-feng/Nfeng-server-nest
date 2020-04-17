@@ -14,7 +14,7 @@ export class Admin {
   @prop({ default: 1 })
   status: number
   @prop()
-  role_id: mongoose.Types.ObjectId
+  role_id: mongoose.Schema.Types.ObjectId
   @prop({ default: d.getTime() })
   add_time: number
   @prop()

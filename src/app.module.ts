@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { PostsModule } from './posts/posts.module';
 import { RoleModule } from './role/role.module';
 import { AdminModule } from './admin/admin.module';
+import { AccessModule } from './access/access.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { AdminModule } from './admin/admin.module';
     PostsModule,
     RoleModule,
     AdminModule,
+    AccessModule,
   ],
   controllers: [AppController],
   providers: [AppService],
