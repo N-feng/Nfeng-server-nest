@@ -6,6 +6,7 @@ import { PostsModule } from './posts/posts.module';
 import { RoleModule } from './role/role.module';
 import { AdminModule } from './admin/admin.module';
 import { AccessModule } from './access/access.module';
+import { RoleAccessModule } from './role-access/model/role-access.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { AccessModule } from './access/access.module';
     RoleModule,
     AdminModule,
     AccessModule,
+    RoleAccessModule,
   ],
   controllers: [AppController],
   providers: [AppService],

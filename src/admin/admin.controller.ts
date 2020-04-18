@@ -1,48 +1,24 @@
 import { Controller, Get, Post, Body, Delete, Put, Param } from '@nestjs/common';
-import { ApiOperation, ApiPropertyOptional, ApiTags } from '@nestjs/swagger';
-import { InjectModel } from 'nestjs-typegoose';
-import { ModelType } from '@typegoose/typegoose/lib/types';
-import { Admin as AdminSchema } from './admin.model';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { AdminService } from './admin.service'
+import { CreateAdminDto } from './dto/create-admin.dto';
 
-class CreateAdminDto {
-  @ApiPropertyOptional({ description: '管理员名称', example: 'username' })
-  username: string
-  @ApiPropertyOptional({ description: '管理员密码', example: 'password' })
-  password: string
-  @ApiPropertyOptional({ description: '管理员电话', example: 'mobile' })
-  mobile: string
-  @ApiPropertyOptional({ description: '管理员邮箱', example: 'email' })
-  email: string
-  @ApiPropertyOptional({ description: '管理员角色', example: 'role_id' })
-  role_id
-}
 
 @Controller('admin')
 @ApiTags('管理员')
 export class AdminController {
-  constructor(
-    @InjectModel(AdminSchema) private readonly adminModel: ModelType<AdminSchema>
-  ) { }
+  constructor(private readonly adminService: AdminService) {}
 
   @Get()
   @ApiOperation({ summary: '管理员列表' })
   async index() {
-    return await this.adminModel.aggregate([
-      {
-        $lookup: {
-          from: 'role',
-          localField: 'role_id',
-          foreignField: '_id',
-          as: 'role'
-        }
-      }
-    ])
+    return await this.adminService.findAll()
   }
 
   @Post()
   @ApiOperation({ summary: '创建管理员' })
-  async create(@Body() createPostDto: CreateAdminDto) {
-    await this.adminModel.create(createPostDto)
+  async create(@Body() body: CreateAdminDto) {
+    await this.adminService.create(body)
     return {
       success: true
     }
@@ -50,8 +26,8 @@ export class AdminController {
 
   @Put(':id')
   @ApiOperation({ summary: '编辑管理员' })
-  async update(@Param('id') id: string, @Body() updateAdminDto: CreateAdminDto) {
-    await this.adminModel.findByIdAndUpdate(id, updateAdminDto)
+  async update(@Param('id') id: string, @Body() body: CreateAdminDto) {
+    await this.adminService.update(id, body)
     return {
       success: true
     }
@@ -60,7 +36,7 @@ export class AdminController {
   @Delete(':id')
   @ApiOperation({ summary: '删除管理员' })
   async remove(@Param('id') id: string) {
-    await this.adminModel.findByIdAndDelete(id)
+    this.adminService.delete(id)
     return {
       success: true
     }
