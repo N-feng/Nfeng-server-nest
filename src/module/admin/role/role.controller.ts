@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger'
-import { RoleService } from './role.service'
-import { CreateRoleDto } from './dto/create-role.dto'
+import { RoleService } from '../../../service/role/role.service'
+import { CreateRoleDto } from '../../../dto/create-role.dto'
 
 
 @Controller('role')
@@ -12,7 +12,7 @@ export class RoleController {
   @Get()
   @ApiOperation({ summary: '角色列表' })
   async index() {
-    return await this.roleService.findAll()
+    return await this.roleService.find()
   }
 
   @Post()

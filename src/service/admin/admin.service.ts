@@ -1,25 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from '@typegoose/typegoose/lib/types';
-import { Admin as AdminSchema } from './model/admin.model';
-import { CreateAdminDto } from './dto/create-admin.dto';
+import { Admin as AdminSchema } from '../../model/admin.model';
+import { CreateAdminDto } from '../../dto/create-admin.dto';
 
 @Injectable()
 export class AdminService {
   constructor(@InjectModel(AdminSchema) private readonly adminModel: ModelType<AdminSchema>) {}
-
-  async findAll() {
-    return await this.adminModel.aggregate([
-      {
-        $lookup: {
-          from: 'role',
-          localField: 'role_id',
-          foreignField: '_id',
-          as: 'role'
-        }
-      }
-    ])
-  }
 
   async create(body: CreateAdminDto) {
     await this.adminModel.create(body)
@@ -31,5 +18,9 @@ export class AdminService {
 
   async delete(id: string) {
     await this.adminModel.findByIdAndDelete(id)
+  }
+
+  getModel() {
+    return this.adminModel
   }
 }

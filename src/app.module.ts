@@ -1,12 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypegooseModule } from 'nestjs-typegoose';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { PostsModule } from './posts/posts.module';
-import { RoleModule } from './role/role.module';
-import { AdminModule } from './admin/admin.module';
-import { AccessModule } from './access/access.module';
-import { RoleAccessModule } from './role-access/model/role-access.module';
+import { PostsModule } from './module/posts/posts.module';
+import { AdminModule } from './module/admin/admin.module';
 
 @Module({
   imports: [
@@ -14,12 +9,7 @@ import { RoleAccessModule } from './role-access/model/role-access.module';
       useNewUrlParser: true
     }),
     PostsModule,
-    RoleModule,
-    AdminModule,
-    AccessModule,
-    RoleAccessModule,
-  ],
-  controllers: [AppController],
-  providers: [AppService],
+    AdminModule
+  ]
 })
 export class AppModule {}

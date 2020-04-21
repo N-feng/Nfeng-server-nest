@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from '@typegoose/typegoose/lib/types';
-import { Role as RoleSchema } from './model/role.model';
-import { CreateRoleDto } from './dto/create-role.dto'
+import { Role as RoleSchema } from '../../model/role.model';
+import { CreateRoleDto } from '../../dto/create-role.dto';
 
 @Injectable()
 export class RoleService {
   constructor(@InjectModel(RoleSchema) private readonly roleModel: ModelType<RoleSchema>) {}
 
-  async findAll() {
-    return await this.roleModel.find()
+  async find(body?: CreateRoleDto) {
+    return await this.roleModel.find(body)
   }
 
   async create(body: CreateRoleDto) {
