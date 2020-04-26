@@ -11,9 +11,8 @@ export class AuthGuard implements CanActivate {
 
     const pathname = req.path; // 获取访问的地址
     const userinfo = req.session && req.session.userinfo; // 获取session里面保存的用户信息
-    if (pathname == `/${Config.adminPath}/login`
-      || pathname == `/${Config.adminPath}/login/code`
-      || pathname == `/${Config.adminPath}/doLogin`) {
+    if (pathname == `/${Config.adminPath}/auth`
+      || pathname == `/${Config.adminPath}/auth/login`) {
       return true;
     } else {
       if (userinfo && userinfo.username) {

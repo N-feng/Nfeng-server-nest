@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from '@typegoose/typegoose/lib/types';
 import { RoleAccess as RoleAccessSchema } from '../../model/role-access.model';
-import { CreateRoleAccessDto } from '../../dto/create-role-access.dto'
-import { AdminService } from '../admin/admin.service';
+import { CreateRoleAccessDto } from '../../dto/create-role-access.dto';
 import { AccessService } from '../access/access.service';
 import * as mongoose from 'mongoose';
 const { ObjectId } = mongoose.Types;
@@ -13,7 +12,6 @@ const { ObjectId } = mongoose.Types;
 export class RoleAccessService {
   constructor(
     @InjectModel(RoleAccessSchema) private readonly roleAccessModel: ModelType<RoleAccessSchema>,
-    private readonly adminService: AdminService,
     private readonly accessService: AccessService
   ) { }
 
@@ -35,7 +33,7 @@ export class RoleAccessService {
 
   async checkAuth(id) {
     /*
-      1、获取当前用户的角色    （如果超级管理员跳过权限判断 is_super=1）
+      1、获取当前用户的角色    （如果超级用户跳过权限判断 is_super=1）
       2、根据角色获取当前角色的权限列表
       3、获取当前访问的url 对应的权限id
       4、判断当前访问的url对应的权限id 是否在权限列表中的id中
