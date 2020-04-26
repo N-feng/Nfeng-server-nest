@@ -11,10 +11,12 @@ import { ManagerController } from './manager/manager.controller';
 import { AccessController } from './access/access.controller'
 import { RoleAccessController } from './role-access/role-access.controller';
 
+import { ToolsService } from '../../service/tools/tools.service';
 import { AdminService } from '../../service/admin/admin.service';
 import { RoleService } from '../../service/role/role.service';
 import { AccessService } from '../../service/access/access.service';
 import { RoleAccessService } from '../../service/role-access/role-access.service';
+import { LoginController } from './login/login.controller';
 
 @Module({
   imports: [
@@ -25,7 +27,7 @@ import { RoleAccessService } from '../../service/role-access/role-access.service
       { typegooseClass: RoleAccess, schemaOptions: { collection: 'role_access' } }
     ])
   ],
-  controllers: [RoleController, ManagerController, AccessController, RoleAccessController],
-  providers: [RoleService, AdminService, AccessService, RoleAccessService ]
+  controllers: [RoleController, ManagerController, AccessController, RoleAccessController, LoginController],
+  providers: [ToolsService, AdminService, RoleService, AccessService, RoleAccessService]
 })
 export class AdminModule {}

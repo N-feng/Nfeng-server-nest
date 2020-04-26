@@ -5,8 +5,9 @@ import { RoleAccessService } from '../../../service/role-access/role-access.serv
 import { CreateRoleAccessDto } from '../../../dto/create-role-access.dto';
 import * as mongoose from 'mongoose';
 const { ObjectId } = mongoose.Types;
+import { Config } from '../../../config/config';
 
-@Controller('role-access')
+@Controller(`${Config.adminPath}/role-access`)
 @ApiTags('授权')
 export class RoleAccessController {
   constructor(private readonly roleAccessService: RoleAccessService) {}

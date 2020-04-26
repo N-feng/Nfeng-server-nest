@@ -1,12 +1,14 @@
 import { Controller, Get, Post, Body, Delete, Put, Param } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { AdminService } from '../../../service/admin/admin.service'
+import { ToolsService } from './../../../service/tools/tools.service';
+import { AdminService } from '../../../service/admin/admin.service';
 import { CreateAdminDto } from '../../../dto/create-admin.dto';
+import { Config } from '../../../config/config';
 
-@Controller('manager')
+@Controller(`${Config.adminPath}/manager`)
 @ApiTags('管理员')
 export class ManagerController {
-  constructor(private readonly adminService: AdminService) {}
+  constructor(private toolsService: ToolsService, private adminService: AdminService) {}
 
   @Get()
   @ApiOperation({ summary: '管理员列表' })
@@ -33,7 +35,8 @@ export class ManagerController {
   @Post()
   @ApiOperation({ summary: '创建管理员' })
   async create(@Body() body: CreateAdminDto) {
-    await this.adminService.create(body)
+    const password = this.toolsService.getMd5(body.password)
+    await this.adminService.create({...body, password})
     return {
       success: true
     }

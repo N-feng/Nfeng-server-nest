@@ -8,6 +8,10 @@ import { CreateAdminDto } from '../../dto/create-admin.dto';
 export class AdminService {
   constructor(@InjectModel(AdminSchema) private readonly adminModel: ModelType<AdminSchema>) {}
 
+  async find(body) {
+    return await this.adminModel.find(body)
+  }
+
   async create(body: CreateAdminDto) {
     await this.adminModel.create(body)
   }

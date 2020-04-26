@@ -2,8 +2,9 @@ import { Controller, Get, Post, Body, Delete, Param, Put } from '@nestjs/common'
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { AccessService } from '../../../service/access/access.service';
 import { CreateAccessDto } from '../../../dto/create-access.dto';
+import { Config } from '../../../config/config';
 
-@Controller('access')
+@Controller(`${Config.adminPath}/access`)
 @ApiTags('权限')
 export class AccessController {
   constructor(private readonly accessService: AccessService) { }

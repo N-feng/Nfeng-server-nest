@@ -4,6 +4,7 @@ import { IsNotEmpty } from 'class-validator'
 import { InjectModel } from 'nestjs-typegoose';
 import { Post as PostSchema } from './post.model'
 import { ModelType } from '@typegoose/typegoose/lib/types';
+import { Config } from '../../config/config';
 
 class CreatePostDto {
   @ApiPropertyOptional({ description: '帖子标题', example: '帖子标题1' })
@@ -13,7 +14,7 @@ class CreatePostDto {
   content: string
 }
 
-@Controller('posts')
+@Controller(`${Config.adminPath}/posts`)
 @ApiTags('帖子')
 export class PostsController {
   constructor(
