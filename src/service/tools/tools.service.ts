@@ -10,16 +10,4 @@ export class ToolsService {
     return md5(str);
   }
 
-  success(msg = '', data = {}) {
-    return {
-      code: 200,
-      data,
-      msg
-    }
-  }
-
-  async error(res, message) {
-    await res.render()
-  }
-
 }

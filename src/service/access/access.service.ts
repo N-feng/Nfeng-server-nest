@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from '@typegoose/typegoose/lib/types';
-import { Access as AccessSchema } from '../../model/access.model';
-import { CreateAccessDto } from '../../dto/create-access.dto'
+import { Access as AccessModel } from '../../model/access.model';
+import { CreateAccessDto } from '../../dto/access.dto'
 import * as mongoose from 'mongoose';
 
 @Injectable()
 export class AccessService {
-  constructor(@InjectModel(AccessSchema) private readonly accessModel: ModelType<AccessSchema>) {}
+  constructor(@InjectModel(AccessModel) private readonly accessModel: ModelType<AccessModel>) {}
 
   async find(body) {
     return await this.accessModel.find(body)

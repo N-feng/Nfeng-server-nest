@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from '@typegoose/typegoose/lib/types';
-import { RoleAccess as RoleAccessSchema } from '../../model/role-access.model';
-import { CreateRoleAccessDto } from '../../dto/create-role-access.dto';
+import { RoleAccess as RoleAccessModel } from '../../model/role_access.model';
+import { CreateRoleAccessDto } from '../../dto/role_access.dto';
 import { AccessService } from '../access/access.service';
 import * as mongoose from 'mongoose';
 const { ObjectId } = mongoose.Types;
@@ -11,7 +11,7 @@ const { ObjectId } = mongoose.Types;
 @Injectable()
 export class RoleAccessService {
   constructor(
-    @InjectModel(RoleAccessSchema) private readonly roleAccessModel: ModelType<RoleAccessSchema>,
+    @InjectModel(RoleAccessModel) private readonly roleAccessModel: ModelType<RoleAccessModel>,
     private readonly accessService: AccessService
   ) { }
 

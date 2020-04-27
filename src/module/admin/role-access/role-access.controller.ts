@@ -2,10 +2,10 @@
 import { Controller, Put, Post, Param, Body, Get } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { RoleAccessService } from '../../../service/role-access/role-access.service';
-import { CreateRoleAccessDto } from '../../../dto/create-role-access.dto';
+import { CreateRoleAccessDto } from '../../../dto/role_access.dto';
+import { Config } from '../../../config/config';
 import * as mongoose from 'mongoose';
 const { ObjectId } = mongoose.Types;
-import { Config } from '../../../config/config';
 
 @Controller(`${Config.adminPath}/role-access`)
 @ApiTags('授权')

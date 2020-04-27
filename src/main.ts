@@ -26,7 +26,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   // 全局配置守卫
-  app.useGlobalGuards(new AuthGuard());
+  // app.useGlobalGuards(new AuthGuard());
 
   // 配置swagger
   const options = new DocumentBuilder()

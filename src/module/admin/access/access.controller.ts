@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Delete, Param, Put } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { AccessService } from '../../../service/access/access.service';
-import { CreateAccessDto } from '../../../dto/create-access.dto';
+import { CreateAccessDto } from '../../../dto/access.dto';
 import { Config } from '../../../config/config';
 
 @Controller(`${Config.adminPath}/access`)

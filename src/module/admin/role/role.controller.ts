@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { RoleService } from '../../../service/role/role.service';
-import { CreateRoleDto } from '../../../dto/create-role.dto';
+import { CreateRoleDto } from '../../../dto/role.dto';
 import { Config } from '../../../config/config';
 
 @Controller(`${Config.adminPath}/role`)

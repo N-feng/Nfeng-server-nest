@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Request, Delete, Put, Param } from '@nestj
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ToolsService } from './../../../service/tools/tools.service';
 import { AuthService } from '../../../service/auth/auth.service';
-import { CreateAuthDto } from '../../../dto/create-auth.dto';
+import { CreateAuthDto } from '../../../dto/auth.dto';
 import { LoginDto } from '../../../dto/login.dto';
 import { Config } from '../../../config/config';
 
