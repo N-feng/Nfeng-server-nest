@@ -8,6 +8,7 @@ import { RoleAccess } from '../../model/role_access.model';
 import { GoodsType } from '../../model/goods_type.model';
 import { GoodsTypeAttribute } from '../../model/goods_type_attribute.model';
 import { GoodsCate } from '../../model/goods_cate.model';
+import { GoodsColor } from '../../model/goods_color.model';
 
 import { RoleController } from './role/role.controller';
 import { AuthController } from './auth/auth.controller';
@@ -16,6 +17,7 @@ import { RoleAccessController } from './role-access/role-access.controller';
 import { GoodsTypeController } from './goods-type/goods-type.controller';
 import { GoodsTypeAttributeController } from './goods-type-attribute/goods-type-attribute.controller';
 import { GoodsCateController } from './goods-cate/goods-cate.controller';
+import { FocusController } from './focus/focus.controller';
 
 import { ToolsService } from '../../service/tools/tools.service';
 import { AuthService } from '../../service/auth/auth.service';
@@ -35,10 +37,11 @@ import { GoodsCateService } from '../../service/goods-cate/goods-cate.service';
       { typegooseClass: RoleAccess, schemaOptions: { collection: 'role_access' } },
       { typegooseClass: GoodsType, schemaOptions: { collection: 'goods_type' } },
       { typegooseClass: GoodsTypeAttribute, schemaOptions: { collection: 'goods_type_attribute' } },
-      { typegooseClass: GoodsCate, schemaOptions: { collection: 'goods_cate' } }
+      { typegooseClass: GoodsCate, schemaOptions: { collection: 'goods_cate' } },
+      { typegooseClass: GoodsColor, schemaOptions: { collection: 'goods_color' } }
     ])
   ],
-  controllers: [RoleController, AuthController, AccessController, RoleAccessController, GoodsTypeController, GoodsTypeAttributeController, GoodsCateController],
+  controllers: [RoleController, AuthController, AccessController, RoleAccessController, GoodsTypeController, GoodsTypeAttributeController, GoodsCateController, FocusController],
   providers: [RoleService, AuthService, AccessService, RoleAccessService, ToolsService, GoodsTypeService, GoodsTypeAttributeService, GoodsCateService]
 })
 export class AdminModule {}

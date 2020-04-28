@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import * as path from 'path';
 import * as cookieParser from 'cookie-parser';
 import * as session from 'express-session';
 import { ValidationPipe } from './pipe/validation.pipe';
@@ -9,6 +10,9 @@ import { AuthGuard } from './guard/auth.guard';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  // 配置静态资源目录
+  app.useStaticAssets(path.join(__dirname, '..', 'public'));
 
   // 配置cookie中间件
   app.use(cookieParser('this signed cookies'));
