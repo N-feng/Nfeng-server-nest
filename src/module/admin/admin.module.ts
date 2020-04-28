@@ -14,10 +14,11 @@ import { RoleController } from './role/role.controller';
 import { AuthController } from './auth/auth.controller';
 import { AccessController } from './access/access.controller'
 import { RoleAccessController } from './role-access/role-access.controller';
+import { FocusController } from './focus/focus.controller';
 import { GoodsTypeController } from './goods-type/goods-type.controller';
 import { GoodsTypeAttributeController } from './goods-type-attribute/goods-type-attribute.controller';
 import { GoodsCateController } from './goods-cate/goods-cate.controller';
-import { FocusController } from './focus/focus.controller';
+import { GoodsColorController } from './goods-color/goods-color.controller';
 
 import { ToolsService } from '../../service/tools/tools.service';
 import { AuthService } from '../../service/auth/auth.service';
@@ -27,6 +28,7 @@ import { RoleAccessService } from '../../service/role-access/role-access.service
 import { GoodsTypeService } from '../../service/goods-type/goods-type.service';
 import { GoodsTypeAttributeService } from '../../service/goods-type-attribute/goods-type-attribute.service';
 import { GoodsCateService } from '../../service/goods-cate/goods-cate.service';
+import { GoodsColorService } from '../../service/goods-color/goods-color.service';
 
 @Module({
   imports: [
@@ -41,7 +43,7 @@ import { GoodsCateService } from '../../service/goods-cate/goods-cate.service';
       { typegooseClass: GoodsColor, schemaOptions: { collection: 'goods_color' } }
     ])
   ],
-  controllers: [RoleController, AuthController, AccessController, RoleAccessController, GoodsTypeController, GoodsTypeAttributeController, GoodsCateController, FocusController],
-  providers: [RoleService, AuthService, AccessService, RoleAccessService, ToolsService, GoodsTypeService, GoodsTypeAttributeService, GoodsCateService]
+  controllers: [RoleController, AuthController, AccessController, RoleAccessController, FocusController, GoodsTypeController, GoodsTypeAttributeController, GoodsCateController, GoodsColorController],
+  providers: [RoleService, AuthService, AccessService, RoleAccessService, ToolsService, GoodsTypeService, GoodsTypeAttributeService, GoodsCateService, GoodsColorService]
 })
 export class AdminModule {}

@@ -14,7 +14,8 @@ import { Config } from './config/config';
     PostsModule,
     AdminModule
   ],
-  providers: []
+  providers: [],
+  controllers: []
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
