@@ -1,4 +1,4 @@
-import { Controller, Get, Post, UseInterceptors, UploadedFiles } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseInterceptors, UploadedFiles } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Config } from '../../../config/config';
@@ -12,10 +12,10 @@ export class FocusController {
   @Post()
   @ApiOperation({ summary: '图片上传' })
   @UseInterceptors(FilesInterceptor('files'))
-  async index(@UploadedFiles() file) {
-    console.log(file);
+  async index(@Body() body, @UploadedFiles() files) {
+    console.log(body);
 
-    const saveDir = this.toolsService.uploadFile(file);
+    const saveDir = this.toolsService.uploadFile(files[0]);
     console.log(saveDir);
 
     return '上传成功';

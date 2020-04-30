@@ -31,18 +31,23 @@ export class ToolsService {
     const d = this.getTime(); // 时间戳 当前图片的名称
 
     // 2、根据日期创建目录
-    const dir = join(__dirname, `../../../public/${Config.uploadDir }`, day);
+    const dir = join(__dirname, `../../../public/${Config.uploadDir}`, day);
     mkdirp.sync(dir);
 
     // 3、实现上传
-    const uploadDir = join(dir, d+extname(file.originalname));
+    // const uploadDir = join(dir, d+extname(file.originalname));
+    const uploadDir = join(dir, file.originalname);
     const writeImage = createWriteStream(uploadDir);
     writeImage.write(file.buffer);
 
     // 4、返回图片保存的地址
-    const saveDir = join(Config.uploadDir, day, d+extname(file.originalname));
+    // const saveDir = join(Config.uploadDir, day, d+extname(file.originalname));
+    const saveDir = join(Config.uploadDir, day, file.originalname);
 
-    return saveDir;
+    return {
+      saveDir,
+      uploadDir
+    };
 
   }
 

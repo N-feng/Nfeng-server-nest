@@ -15,11 +15,13 @@ export class GoodsCateService {
   }
 
   async create(body: CreateGoodsCateDto) {
-    await this.goodsCateModel.create({...body, pid: body.pid != '0' ? ObjectId(body.pid) : body.pid})
+    const pid = body.pid != '0' ? ObjectId(body.pid) : body.pid
+    await this.goodsCateModel.create({...body, pid })
   }
 
   async update(id: string, body: CreateGoodsCateDto) {
-    return await this.goodsCateModel.findByIdAndUpdate({_id: id}, body)
+    const pid = body.pid != '0' ? ObjectId(body.pid) : body.pid
+    return await this.goodsCateModel.findByIdAndUpdate({_id: id}, {...body, pid})
   }
 
   async delete(id: string) {

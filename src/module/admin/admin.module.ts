@@ -8,7 +8,10 @@ import { RoleAccess } from '../../model/role_access.model';
 import { GoodsType } from '../../model/goods_type.model';
 import { GoodsTypeAttribute } from '../../model/goods_type_attribute.model';
 import { GoodsCate } from '../../model/goods_cate.model';
+import { Goods } from '../../model/goods.model';
 import { GoodsColor } from '../../model/goods_color.model';
+import { GoodsImage } from '../../model/goods_image.model';
+import { GoodsAttr } from '../../model/goods_attr.model'
 
 import { RoleController } from './role/role.controller';
 import { AuthController } from './auth/auth.controller';
@@ -19,6 +22,7 @@ import { GoodsTypeController } from './goods-type/goods-type.controller';
 import { GoodsTypeAttributeController } from './goods-type-attribute/goods-type-attribute.controller';
 import { GoodsCateController } from './goods-cate/goods-cate.controller';
 import { GoodsColorController } from './goods-color/goods-color.controller';
+import { GoodsController } from './goods/goods.controller';
 
 import { ToolsService } from '../../service/tools/tools.service';
 import { AuthService } from '../../service/auth/auth.service';
@@ -29,6 +33,9 @@ import { GoodsTypeService } from '../../service/goods-type/goods-type.service';
 import { GoodsTypeAttributeService } from '../../service/goods-type-attribute/goods-type-attribute.service';
 import { GoodsCateService } from '../../service/goods-cate/goods-cate.service';
 import { GoodsColorService } from '../../service/goods-color/goods-color.service';
+import { GoodsService } from '../../service/goods/goods.service';
+import { GoodsImageService } from '../../service/goods-image/goods-image.service';
+import { GoodsAttrService } from '../../service/goods-attr/goods-attr.service';
 
 @Module({
   imports: [
@@ -40,10 +47,13 @@ import { GoodsColorService } from '../../service/goods-color/goods-color.service
       { typegooseClass: GoodsType, schemaOptions: { collection: 'goods_type' } },
       { typegooseClass: GoodsTypeAttribute, schemaOptions: { collection: 'goods_type_attribute' } },
       { typegooseClass: GoodsCate, schemaOptions: { collection: 'goods_cate' } },
-      { typegooseClass: GoodsColor, schemaOptions: { collection: 'goods_color' } }
+      { typegooseClass: Goods, schemaOptions: { collection: 'goods' } },
+      { typegooseClass: GoodsColor, schemaOptions: { collection: 'goods_color' } },
+      { typegooseClass: GoodsImage, schemaOptions: { collection: 'goods_image' } },
+      { typegooseClass: GoodsAttr, schemaOptions: { collection: 'goods_attr' } }
     ])
   ],
-  controllers: [RoleController, AuthController, AccessController, RoleAccessController, FocusController, GoodsTypeController, GoodsTypeAttributeController, GoodsCateController, GoodsColorController],
-  providers: [RoleService, AuthService, AccessService, RoleAccessService, ToolsService, GoodsTypeService, GoodsTypeAttributeService, GoodsCateService, GoodsColorService]
+  controllers: [RoleController, AuthController, AccessController, RoleAccessController, FocusController, GoodsTypeController, GoodsTypeAttributeController, GoodsCateController, GoodsColorController, GoodsController],
+  providers: [RoleService, AuthService, AccessService, RoleAccessService, ToolsService, GoodsTypeService, GoodsTypeAttributeService, GoodsCateService, GoodsColorService, GoodsService, GoodsImageService, GoodsAttrService]
 })
 export class AdminModule {}
