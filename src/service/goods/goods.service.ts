@@ -3,15 +3,17 @@ import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from '@typegoose/typegoose/lib/types';
 import { Goods as GoodsModel } from '../../model/goods.model';
 import { CreateGoodsDto } from '../../dto/goods.dto';
-import * as mongoose from 'mongoose';
-const { ObjectId } = mongoose.Types;
 
 @Injectable()
 export class GoodsService {
   constructor(@InjectModel(GoodsModel) private readonly goodsModel: ModelType<GoodsModel>) {}
 
-  async find(body?) {
-    return await this.goodsModel.find(body)
+  async find(body?, skip = 0, limit = 0, fields?: string) {
+    return await this.goodsModel.find(body, fields).skip(skip).limit(limit)
+  }
+
+  async count(body?) {
+    return await this.goodsModel.find(body).count()
   }
 
   async create(body: CreateGoodsDto) {

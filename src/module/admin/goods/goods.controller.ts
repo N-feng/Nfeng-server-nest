@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, UseInterceptors, UploadedFile, Query } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { GoodsService } from '../../../service/goods/goods.service';
@@ -22,8 +22,30 @@ export class GoodsController {
 
   @Get()
   @ApiOperation({ summary: '商品列表' })
-  async index() {
-    return await this.goodsService.find()
+  async index(@Query() query) {
+    // 分页 搜索商品数据
+    const {keyword} = query;
+    // 条件
+    let json = {};
+    if (keyword) {
+      json = Object.assign(json, {"title": { $regex: new RegExp(keyword) }});
+    }
+
+    const page = query.page || 1;
+    const pageSize = 3;
+    const skip = (page - 1) * pageSize;
+    const goodsResult = await this.goodsService.find(json, skip, pageSize)
+
+    const count = await this.goodsService.count(json)
+
+    const totalPages = Math.ceil(count / pageSize);
+
+    return {
+      goodsList: goodsResult,
+      page,
+      totalPages,
+      keyword
+    }
   }
 
   @Post()
