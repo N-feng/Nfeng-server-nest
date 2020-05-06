@@ -14,7 +14,7 @@ export class AccessController {
   async index() {
     //1、在access表中找出  module_id=0的数据
     //2、让access表和access表关联    条件：找出access表中module_id等于_id的数据
-    var result = await this.accessService.getModel().aggregate([
+    const list = await this.accessService.getModel().aggregate([
       {
         $lookup: {
           from: 'access',
@@ -32,7 +32,7 @@ export class AccessController {
 
     // console.log(JSON.stringify(result))
 
-    return result
+    return { code: 200, list }
   }
 
   @Post()

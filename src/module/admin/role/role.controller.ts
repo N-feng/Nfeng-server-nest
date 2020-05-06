@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, Query } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { RoleService } from '../../../service/role/role.service';
 import { CreateRoleDto } from '../../../dto/role.dto';
@@ -11,8 +11,29 @@ export class RoleController {
 
   @Get()
   @ApiOperation({ summary: '角色列表' })
-  async index() {
-    return await this.roleService.find()
+  async index(@Query() query) {
+    // 分页 搜索商品数据
+    const {keyword} = query;
+    // 条件
+    let json = {};
+    if (keyword) {
+      json = Object.assign(json, {"title": { $regex: new RegExp(keyword) }});
+    }
+
+    const page = query.page || 1;
+    const pageSize = 3;
+    const skip = (page - 1) * pageSize;
+    const list = await this.roleService.find(json, skip, pageSize)
+
+    const count = await this.roleService.count(json)
+
+    const total = Math.ceil(count / pageSize);
+
+    return {
+      code: 200,
+      list,
+      total
+    }
   }
 
   @Post()

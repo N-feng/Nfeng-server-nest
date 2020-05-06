@@ -8,8 +8,12 @@ import { CreateRoleDto } from '../../dto/role.dto';
 export class RoleService {
   constructor(@InjectModel(RoleModel) private readonly roleModel: ModelType<RoleModel>) {}
 
-  async find(body?: CreateRoleDto) {
-    return await this.roleModel.find(body)
+  async find(body?, skip = 0, limit = 0, fields?: string) {
+    return await this.roleModel.find(body, fields).skip(skip).limit(limit)
+  }
+
+  async count(body?) {
+    return await this.roleModel.find(body).count()
   }
 
   async create(body: CreateRoleDto) {

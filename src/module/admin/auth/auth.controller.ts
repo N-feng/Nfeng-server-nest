@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Request, Delete, Put, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Request, Delete, Put, Param, BadRequestException } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ToolsService } from './../../../service/tools/tools.service';
 import { AuthService } from '../../../service/auth/auth.service';
@@ -69,15 +69,10 @@ export class AuthController {
 
     if (userResult.length>0) {
       req.session.userinfo = userResult[0]
-      return {
-        success: true,
-        msg: '登录成功'
-      };
+      return {code: 200, msg: '登录成功'}
     } else {
-      return {
-        success: true,
-        msg: '用户名或者密码不正确'
-      };
+      throw new BadRequestException({ code: 400, msg: '用户名或者密码不正确' })
+      return {code: 500, msg: '用户名或者密码不正确'}
     }
   }
 

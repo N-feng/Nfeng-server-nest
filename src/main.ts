@@ -22,7 +22,7 @@ async function bootstrap() {
     secret: 'keyboard cat',
     resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: 109000, httpOnly: true },
+    // cookie: { maxAge: 109000, httpOnly: true },
     rolling: true
   }));
 
@@ -30,7 +30,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   // 全局配置守卫
-  // app.useGlobalGuards(new AuthGuard());
+  app.useGlobalGuards(new AuthGuard());
 
   // 配置swagger
   const options = new DocumentBuilder()

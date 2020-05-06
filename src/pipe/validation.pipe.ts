@@ -9,7 +9,7 @@ export class ValidationPipe implements PipeTransform<any> {
       return value;
     }
     const object = plainToClass(metatype, value);
-    const errors = await validate(object)
+    const errors = await validate(object, { validationError: { target: false } })
     if (errors.length > 0) {
       const errorMsg = []
       errors.forEach((item) => {
@@ -17,8 +17,8 @@ export class ValidationPipe implements PipeTransform<any> {
           errorMsg.push(item.constraints[el])
         })
       });
+      throw new BadRequestException(errorMsg);
       // throw new BadRequestException('Validation failed');
-      throw new BadRequestException(errorMsg)
     }
     return value;
   }
