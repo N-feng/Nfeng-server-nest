@@ -54,6 +54,7 @@ import { GoodsAttrService } from '../../service/goods-attr/goods-attr.service';
     ])
   ],
   controllers: [RoleController, AuthController, AccessController, RoleAccessController, FocusController, GoodsTypeController, GoodsTypeAttributeController, GoodsCateController, GoodsColorController, GoodsController],
-  providers: [RoleService, AuthService, AccessService, RoleAccessService, ToolsService, GoodsTypeService, GoodsTypeAttributeService, GoodsCateService, GoodsColorService, GoodsService, GoodsImageService, GoodsAttrService]
+  providers: [RoleService, AuthService, AccessService, RoleAccessService, ToolsService, GoodsTypeService, GoodsTypeAttributeService, GoodsCateService, GoodsColorService, GoodsService, GoodsImageService, GoodsAttrService],
+  exports: [RoleAccessService]
 })
 export class AdminModule {}

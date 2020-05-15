@@ -52,7 +52,7 @@ export class CreateGoodsDto {
   @ApiPropertyOptional({ description: '商品状态' })
   state: number
   @ApiPropertyOptional({ description: '增加时间' })
-  add_time: number
+  createAt: number
   @ApiPropertyOptional({ description: '商品图库' })
   goods_image_list?: string[]
   @ApiPropertyOptional({ description: '商品类型id' })

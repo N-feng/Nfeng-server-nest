@@ -34,26 +34,20 @@ export class GoodsCateController {
   @ApiOperation({ summary: '创建商品分类' })
   async create(@Body() body: CreateGoodsCateDto) {
     await this.goodsCateService.create(body)
-    return {
-      success: true
-    }
+    return {code: 200, data: {}}
   }
 
   @Put(':id')
   @ApiOperation({ summary: '编辑商品分类' })
   async update(@Param('id') id: string, @Body() body: CreateGoodsCateDto) {
     await this.goodsCateService.update(id, body)
-    return {
-      success: true
-    }
+    return {code: 200, data: {}}
   }
 
   @Delete(':id')
   @ApiOperation({ summary: '删除商品分类' })
   async remove(@Param('id') id: string) {
     await this.goodsCateService.delete(id)
-    return {
-      success: true
-    }
+    return {code: 200, data: {}}
   }
 }

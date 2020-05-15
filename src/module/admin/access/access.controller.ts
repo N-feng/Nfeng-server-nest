@@ -1,64 +1,84 @@
-import { Controller, Get, Post, Body, Delete, Param, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Param, Put, Query } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
-import { AccessService } from '../../../service/access/access.service';
-import { CreateAccessDto } from '../../../dto/access.dto';
-import { Config } from '../../../config/config';
+import { AccessService } from 'src/service/access/access.service';
+import { CreateAccessDto } from 'src/dto/access.dto';
+import { Config } from 'src/config/config';
 
 @Controller(`${Config.adminPath}/access`)
 @ApiTags('权限')
 export class AccessController {
   constructor(private readonly accessService: AccessService) { }
 
-  @Get()
+  @Post('findAll')
   @ApiOperation({ summary: '权限列表' })
-  async index() {
-    //1、在access表中找出  module_id=0的数据
-    //2、让access表和access表关联    条件：找出access表中module_id等于_id的数据
-    const list = await this.accessService.getModel().aggregate([
+  async findAll() {
+    //1、在access表中找出  moduleId=0的数据
+    //2、让access表和access表关联    条件：找出access表中moduleId等于_id的数据
+    const result = await this.accessService.getModel().aggregate([
       {
         $lookup: {
           from: 'access',
           localField: '_id',
-          foreignField: 'module_id',
-          as: 'items'
+          foreignField: 'moduleId',
+          as: 'children'
         }
       },
       {
         $match: {
-          "module_id": '0'
+          moduleId: '0'
         }
       }
     ])
-
-    // console.log(JSON.stringify(result))
-
-    return { code: 200, list }
+    return { code: 200, data: { list: result } }
   }
 
-  @Post()
+  @Post('findOne')
+  @ApiOperation({ summary: '权限详情' })
+  async findOne(@Query('id') id: string) {
+    const role = await this.accessService.findOne(id)
+    return {code: 200, data: role}
+  }
+
+  @Post('getModules')
+  @ApiOperation({ summary: '模块枚举' })
+  async getModules() {
+    const result = await this.accessService.getModel().aggregate([
+      {
+        $match: {
+          moduleId: '0'
+        }
+      }
+    ])
+    const list = [{
+      label: '顶级模块',
+      value: '0'
+    },...result.map((item) => {
+      return {
+        label: item.moduleName,
+        value: item._id,
+      }
+    })]
+    return { code: 200, data: { list } }
+  }
+
+  @Post('create')
   @ApiOperation({ summary: '创建权限' })
   async create(@Body() body: CreateAccessDto) {
     await this.accessService.create(body)
-    return {
-      success: true
-    }
+    return {code: 200, data: {}}
   }
 
-  @Put(':id')
-  @ApiOperation({ summary: '编辑权限' })
-  async update(@Param('id') id: string, @Body() body: CreateAccessDto) {
-    await this.accessService.update(id, body)
-    return {
-      success: true
-    }
+  @Post('update')
+  @ApiOperation({ summary: '更新权限' })
+  async update(@Body() body: CreateAccessDto) {
+    await this.accessService.update(body.id, body)
+    return {code: 200, data: {}}
   }
 
   @Delete(':id')
   @ApiOperation({ summary: '删除权限' })
   async remove(@Param('id') id: string) {
     await this.accessService.delete(id)
-    return {
-      success: true
-    }
+    return {code: 200, data: {}}
   }
 }

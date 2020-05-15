@@ -54,5 +54,5 @@ export class Goods {
   @prop({ default: 1 })
   status: number
   @prop({ default: d.getTime() })
-  add_time: number
+  createAt: number
 }

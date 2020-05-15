@@ -9,5 +9,5 @@ export class Role {
   @prop()
   status: string
   @prop({default: d.getTime()})
-  add_time: number
+  createAt: number
 }

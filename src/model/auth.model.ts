@@ -14,9 +14,9 @@ export class Auth {
   @prop({ default: 1 })
   status: number
   @prop()
-  role_id: mongoose.Schema.Types.ObjectId
+  roleId: mongoose.Schema.Types.ObjectId
   @prop({ default: d.getTime() })
-  add_time: number
+  createAt: number
   @prop()
-  is_super: number
+  isSuper: number
 }

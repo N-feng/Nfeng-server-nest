@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from '@typegoose/typegoose/lib/types';
-import { Role as RoleModel } from '../../model/role.model';
-import { CreateRoleDto } from '../../dto/role.dto';
+import { Role as RoleModel } from 'src/model/role.model';
+import { CreateRoleDto } from 'src/dto/role.dto';
 
 @Injectable()
 export class RoleService {
@@ -16,12 +16,16 @@ export class RoleService {
     return await this.roleModel.find(body).count()
   }
 
+  async findOne(id) {
+    return await this.roleModel.findById(id)
+  }
+
   async create(body: CreateRoleDto) {
     return await this.roleModel.create(body)
   }
 
-  async update(id:string, body: CreateRoleDto) {
-    await this.roleModel.findByIdAndUpdate(id, body)
+  async update(body: CreateRoleDto) {
+    await this.roleModel.findByIdAndUpdate(body.id, body)
   }
 
   async delete(id: string) {

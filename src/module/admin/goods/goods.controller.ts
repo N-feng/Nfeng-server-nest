@@ -78,7 +78,7 @@ export class GoodsController {
     if (result._id) {
       for (let i = 0; i < attr_id_list.length; i++) {
         // 获取当前 商品类型id对应的商品类型属性
-        let goodsTypeAttributeResult = await this.goodsTypeAttributeService.find({ _id: attr_id_list[i] });
+        const goodsTypeAttributeResult = await this.goodsTypeAttributeService.find({ _id: attr_id_list[i] });
 
         this.goodsAttrService.create({
           goods_id: result._id,
@@ -93,26 +93,20 @@ export class GoodsController {
       }
     }
 
-    return {
-      success: true
-    }
+    return {code: 200, data: {}}
   }
 
   @Put(':id')
   @ApiOperation({ summary: '编辑商品' })
   async update(@Param('id') id: string, @Body() body: CreateGoodsDto) {
     await this.goodsService.update(id, body)
-    return {
-      success: true
-    }
+    return {code: 200, data: {}}
   }
 
   @Delete(':id')
   @ApiOperation({ summary: '删除商品' })
   async remove(@Param('id') id: string) {
     await this.goodsService.delete(id)
-    return {
-      success: true
-    }
+    return {code: 200, data: {}}
   }
 }

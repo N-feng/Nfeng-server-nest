@@ -9,6 +9,6 @@ export class CreateAuthDto {
   mobile: string
   @ApiPropertyOptional({ description: '用户邮箱', example: 'email' })
   email: string
-  @ApiPropertyOptional({ description: '用户角色', example: 'role_id' })
-  role_id: string
+  @ApiPropertyOptional({ description: '用户角色', example: 'roleId' })
+  roleId: string
 }

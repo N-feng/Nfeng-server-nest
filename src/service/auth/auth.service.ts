@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from '@typegoose/typegoose/lib/types';
-import { Auth as AuthModel } from '../../model/auth.model';
-import { CreateAuthDto } from '../../dto/auth.dto';
+import { Auth as AuthModel } from 'src/model/auth.model';
+import { CreateAuthDto } from 'src/dto/auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -10,6 +10,10 @@ export class AuthService {
 
   async find(body) {
     return await this.authModel.find(body)
+  }
+
+  async findOne(id) {
+    return await this.authModel.findById(id)
   }
 
   async create(body: CreateAuthDto) {

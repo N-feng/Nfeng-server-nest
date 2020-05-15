@@ -19,26 +19,20 @@ export class GoodsTypeController {
   @ApiOperation({ summary: '创建商品类型' })
   async create(@Body() body: CreateGoodsTypeDto) {
     await this.goodsTypeService.create(body)
-    return {
-      success: true
-    }
+    return {code: 200, data: {}}
   }
 
   @Put(':id')
   @ApiOperation({ summary: '编辑商品类型' })
   async update(@Param('id') id: string, @Body() body: CreateGoodsTypeDto) {
     await this.goodsTypeService.update(id, body)
-    return {
-      success: true
-    }
+    return {code: 200, data: {}}
   }
 
   @Delete(':id')
   @ApiOperation({ summary: '删除商品类型' })
   async remove(@Param('id') id: string) {
     await this.goodsTypeService.delete(id)
-    return {
-      success: true
-    }
+    return {code: 200, data: {}}
   }
 }

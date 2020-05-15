@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from '@typegoose/typegoose/lib/types';
-import { Access as AccessModel } from '../../model/access.model';
-import { CreateAccessDto } from '../../dto/access.dto'
+import { Access as AccessModel } from 'src/model/access.model';
+// import { CreateAccessDto } from 'src/dto/access.dto'
 import * as mongoose from 'mongoose';
 
 @Injectable()
@@ -13,15 +13,23 @@ export class AccessService {
     return await this.accessModel.find(body)
   }
 
+  async findOne(id) {
+    return await this.accessModel.findById(id)
+  }
+
   async create(body) {
-    const { module_id } = body
-    if(module_id!='0') {
-      body.module_id = mongoose.Types.ObjectId(module_id)
+    const { moduleId } = body
+    if(moduleId!='0') {
+      body.moduleId = mongoose.Types.ObjectId(moduleId)
     }
     await this.accessModel.create(body)
   }
 
-  async update(id, body: CreateAccessDto) {
+  async update(id, body) {
+    const { moduleId } = body
+    if(moduleId!='0') {
+      body.moduleId = mongoose.Types.ObjectId(moduleId)
+    }
     await this.accessModel.findByIdAndUpdate(id, body)
   }
 

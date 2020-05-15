@@ -4,15 +4,15 @@ const d = new Date();
 
 export class Access {
   @prop()
-  module_name: string
+  moduleName: string
   @prop()
-  action_name: string
+  actionName: string
   @prop()
   type: number
   @prop()
   url: string
   @prop()
-  module_id: mongoose.Schema.Types.Mixed
+  moduleId: mongoose.Schema.Types.Mixed
   @prop()
   sort: number
   @prop()
@@ -20,5 +20,5 @@ export class Access {
   @prop({ default: 1 })
   status: number
   @prop()
-  add_time: number
+  createAt: number
 }

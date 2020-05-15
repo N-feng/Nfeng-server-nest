@@ -19,26 +19,20 @@ export class GoodsColorController {
   @ApiOperation({ summary: '创建商品颜色' })
   async create(@Body() body: CreateGoodsColorDto) {
     await this.goodsColorService.create(body)
-    return {
-      success: true
-    }
+    return {code: 200, data: {}}
   }
 
   @Put(':id')
   @ApiOperation({ summary: '编辑商品颜色' })
   async update(@Param('id') id: string, @Body() body: CreateGoodsColorDto) {
     await this.goodsColorService.update(id, body)
-    return {
-      success: true
-    }
+    return {code: 200, data: {}}
   }
 
   @Delete(':id')
   @ApiOperation({ summary: '删除商品颜色' })
   async remove(@Param('id') id: string) {
     await this.goodsColorService.delete(id)
-    return {
-      success: true
-    }
+    return {code: 200, data: {}}
   }
 }

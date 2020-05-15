@@ -24,5 +24,5 @@ export class GoodsCate {
   @prop({ default: 100 })
   sort: number
   @prop({ default: d.getTime() })
-  add_time: number
+  createAt: number
 }

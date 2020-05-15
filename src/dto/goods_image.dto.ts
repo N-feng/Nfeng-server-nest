@@ -12,5 +12,5 @@ export class CreateGoodsImageDto {
   // @ApiPropertyOptional({ description: '商品状态' })
   // state: number
   // @ApiPropertyOptional({ description: '增加时间' })
-  // add_time: number
+  // createAt: number
 }
