@@ -1,8 +1,8 @@
 import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { GoodsTypeService } from '../../../service/goods-type/goods-type.service';
-import { CreateGoodsTypeDto } from '../../../dto/goods_type.dto';
-import { Config } from '../../../config/config';
+import { GoodsTypeService } from '../../service/goods-type/goods-type.service';
+import { CreateGoodsTypeDto } from '../../dto/goods_type.dto';
+import { Config } from '../../config/config';
 
 @Controller(`${Config.adminPath}/goods-type`)
 @ApiTags('商品类型')

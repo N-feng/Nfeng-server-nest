@@ -2,7 +2,7 @@ import { prop } from '@typegoose/typegoose';
 import * as mongoose from 'mongoose';
 const d = new Date();
 
-export class Auth {
+export class User {
   @prop()
   username: string
   @prop()

@@ -21,10 +21,10 @@ export class AdminauthMiddleware implements NestMiddleware {
       // }
     } else {
       // 排除不需要做权限判断的页面
-      if (pathname == `/${Config.adminPath}/auth/login` || pathname == `/${Config.adminPath}/login/code` || pathname == `/${Config.adminPath}/doLogin`) {
+      if (pathname == `/${Config.adminPath}/user/login` || pathname == `/${Config.adminPath}/login/code` || pathname == `/${Config.adminPath}/doLogin`) {
         next()
       } else {
-        throw new UnauthorizedException({code: 401, msg: '401 Unauthorized'})
+        throw new UnauthorizedException({ code: 401, msg: '401 Unauthorized' })
       }
     }
   }

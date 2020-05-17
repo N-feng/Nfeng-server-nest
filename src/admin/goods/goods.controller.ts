@@ -1,13 +1,13 @@
 import { Controller, Get, Post, Put, Delete, Body, Param, UseInterceptors, UploadedFile, Query } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { GoodsService } from '../../../service/goods/goods.service';
-import { GoodsImageService } from '../../../service/goods-image/goods-image.service';
-import { GoodsTypeAttributeService } from '../../../service/goods-type-attribute/goods-type-attribute.service';
-import { GoodsAttrService } from '../../../service/goods-attr/goods-attr.service'
-import { ToolsService } from '../../../service/tools/tools.service'
-import { CreateGoodsDto } from '../../../dto/goods.dto';
-import { Config } from '../../../config/config';
+import { GoodsService } from 'src/service/goods/goods.service';
+import { GoodsImageService } from 'src/service/goods-image/goods-image.service';
+import { GoodsTypeAttributeService } from 'src/service/goods-type-attribute/goods-type-attribute.service';
+import { GoodsAttrService } from 'src/service/goods-attr/goods-attr.service'
+import { ToolsService } from 'src/service/tools/tools.service'
+import { CreateGoodsDto } from 'src/dto/goods.dto';
+import { Config } from 'src/config/config';
 
 @Controller(`${Config.adminPath}/goods`)
 @ApiTags('商品')

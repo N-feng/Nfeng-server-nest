@@ -1,8 +1,8 @@
 import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { GoodsColorService } from '../../../service/goods-color/goods-color.service';
-import { CreateGoodsColorDto } from '../../../dto/goods_color.dto';
-import { Config } from '../../../config/config';
+import { GoodsColorService } from '../../service/goods-color/goods-color.service';
+import { CreateGoodsColorDto } from '../../dto/goods_color.dto';
+import { Config } from '../../config/config';
 
 @Controller(`${Config.adminPath}/goods-color`)
 @ApiTags('商品颜色')
