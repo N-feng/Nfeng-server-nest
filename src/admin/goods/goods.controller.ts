@@ -5,7 +5,7 @@ import { GoodsService } from 'src/service/goods/goods.service';
 import { GoodsImageService } from 'src/service/goods-image/goods-image.service';
 import { GoodsTypeAttributeService } from 'src/service/goods-type-attribute/goods-type-attribute.service';
 import { GoodsAttrService } from 'src/service/goods-attr/goods-attr.service'
-import { ToolsService } from 'src/service/tools/tools.service'
+import { ToolsService } from 'src/admin/tools/tools.service'
 import { CreateGoodsDto } from 'src/dto/goods.dto';
 import { Config } from 'src/config/config';
 

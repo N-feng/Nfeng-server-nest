@@ -23,12 +23,13 @@ import { GoodsTypeAttributeController } from './goods-type-attribute/goods-type-
 import { GoodsCateController } from './goods-cate/goods-cate.controller';
 import { GoodsColorController } from './goods-color/goods-color.controller';
 import { GoodsController } from './goods/goods.controller';
+import { EnumController } from './enum/enum.controller';
 
-import { ToolsService } from '../service/tools/tools.service';
+import { ToolsService } from './tools/tools.service';
 import { UserService } from './user/user.service';
-import { RoleService } from '../service/role/role.service';
-import { AccessService } from '../service/access/access.service';
-import { RoleAccessService } from '../service/role-access/role-access.service';
+import { RoleService } from './role/role.service';
+import { AccessService } from './access/access.service';
+import { RoleAccessService } from './role-access/role-access.service';
 import { GoodsTypeService } from '../service/goods-type/goods-type.service';
 import { GoodsTypeAttributeService } from '../service/goods-type-attribute/goods-type-attribute.service';
 import { GoodsCateService } from '../service/goods-cate/goods-cate.service';
@@ -53,7 +54,7 @@ import { GoodsAttrService } from '../service/goods-attr/goods-attr.service';
       { typegooseClass: GoodsAttr, schemaOptions: { collection: 'goods_attr' } }
     ])
   ],
-  controllers: [RoleController, UserController, AccessController, RoleAccessController, FocusController, GoodsTypeController, GoodsTypeAttributeController, GoodsCateController, GoodsColorController, GoodsController],
+  controllers: [RoleController, UserController, AccessController, RoleAccessController, FocusController, GoodsTypeController, GoodsTypeAttributeController, GoodsCateController, GoodsColorController, GoodsController, EnumController],
   providers: [RoleService, UserService, AccessService, RoleAccessService, ToolsService, GoodsTypeService, GoodsTypeAttributeService, GoodsCateService, GoodsColorService, GoodsService, GoodsImageService, GoodsAttrService],
   exports: [RoleAccessService]
 })

@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, UseInterceptors, UploadedFiles } from '@ne
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Config } from 'src/config/config';
-import { ToolsService } from 'src/service/tools/tools.service'
+import { ToolsService } from 'src/admin/tools/tools.service'
 
 @Controller(`${Config.adminPath}/focus`)
 @ApiTags('图片上传')

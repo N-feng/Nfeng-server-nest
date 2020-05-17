@@ -1,13 +1,13 @@
 import { Controller, Post, Delete, Body, Param } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { RoleService } from 'src/service/role/role.service';
-import { CreateRoleDto } from 'src/dto/role.dto';
+import { RoleService } from 'src/admin/role/role.service';
+import { CreateRoleDto } from 'src/admin/role/dto/role.dto';
 import { Config } from 'src/config/config';
 
 @Controller(`${Config.adminPath}/role`)
 @ApiTags('角色')
 export class RoleController {
-  constructor(private readonly roleService: RoleService) {}
+  constructor(private roleService: RoleService) {}
 
   @Post('findAll')
   @ApiOperation({ summary: '角色列表' })
@@ -32,21 +32,6 @@ export class RoleController {
   async findOne(@Body('id') id: string) {
     const role = await this.roleService.findOne(id)
     return {code: 200, data: role}
-  }
-
-  @Post('getRoles')
-  @ApiOperation({ summary: '角色枚举' })
-  async getModules() {
-    const result = await this.roleService.find()
-    const list = [
-      ...result.map((item) => {
-        return {
-          label: item.title,
-          value: item._id,
-        }
-      })
-    ]
-    return { code: 200, data: { list } }
   }
 
   @Post('create')

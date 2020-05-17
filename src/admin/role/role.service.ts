@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from '@typegoose/typegoose/lib/types';
 import { Role as RoleModel } from 'src/model/role.model';
-import { CreateRoleDto } from 'src/dto/role.dto';
+import { CreateRoleDto } from 'src/admin/role/dto/role.dto';
 
 @Injectable()
 export class RoleService {

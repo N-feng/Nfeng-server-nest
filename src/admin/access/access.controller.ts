@@ -1,7 +1,7 @@
-import { Controller, Get, Post, Body, Delete, Param, Put, Query } from '@nestjs/common';
+import { Controller, Post, Body, Delete, Param } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
-import { AccessService } from 'src/service/access/access.service';
-import { CreateAccessDto } from 'src/dto/access.dto';
+import { AccessService } from 'src/admin/access/access.service';
+import { CreateAccessDto } from 'src/admin/access/dto/access.dto';
 import { Config } from 'src/config/config';
 
 @Controller(`${Config.adminPath}/access`)
@@ -34,31 +34,9 @@ export class AccessController {
 
   @Post('findOne')
   @ApiOperation({ summary: '权限详情' })
-  async findOne(@Query('id') id: string) {
+  async findOne(@Body('id') id: string) {
     const role = await this.accessService.findOne(id)
     return {code: 200, data: role}
-  }
-
-  @Post('getModules')
-  @ApiOperation({ summary: '模块枚举' })
-  async getModules() {
-    const result = await this.accessService.getModel().aggregate([
-      {
-        $match: {
-          moduleId: '0'
-        }
-      }
-    ])
-    const list = [{
-      label: '顶级模块',
-      value: '0'
-    },...result.map((item) => {
-      return {
-        label: item.moduleName,
-        value: item._id,
-      }
-    })]
-    return { code: 200, data: { list } }
   }
 
   @Post('create')

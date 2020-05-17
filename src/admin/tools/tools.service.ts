@@ -14,7 +14,7 @@ export class ToolsService {
   }
 
   getTime() {
-    let d = new Date();
+    const d = new Date();
     return d.getTime();
   }
 
@@ -28,7 +28,7 @@ export class ToolsService {
 
     // 1、获取当前日期 20200428
     const day = format(new Date(), 'YYYYMMDD'); // 目录名称
-    const d = this.getTime(); // 时间戳 当前图片的名称
+    // const d = this.getTime(); // 时间戳 当前图片的名称
 
     // 2、根据日期创建目录
     const dir = join(__dirname, `../../../public/${Config.uploadDir}`, day);
@@ -44,10 +44,7 @@ export class ToolsService {
     // const saveDir = join(Config.uploadDir, day, d+extname(file.originalname));
     const saveDir = join(Config.uploadDir, day, file.originalname);
 
-    return {
-      saveDir,
-      uploadDir
-    };
+    return { saveDir, uploadDir }
 
   }
 
