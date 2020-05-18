@@ -1,22 +1,17 @@
 import { prop } from '@typegoose/typegoose'
-import * as mongoose from 'mongoose'
 const d = new Date()
 
-export class Access {
+export class Focus {
   @prop()
-  moduleName: string
-  @prop()
-  actionName: string
+  title: string
   @prop()
   type: number
   @prop()
-  url: string
+  focusImg: string
   @prop()
-  moduleId: mongoose.Schema.Types.Mixed
+  link: string
   @prop()
   sort: number
-  @prop()
-  description: string
   @prop({ default: 1 })
   status: number
   @prop({ default: d.getTime() })

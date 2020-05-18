@@ -1,23 +1,44 @@
-import { Controller, Get, Post, Body, UseInterceptors, UploadedFiles } from '@nestjs/common';
-import { FilesInterceptor } from '@nestjs/platform-express';
+import { Controller, Post, Body, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Config } from 'src/config/config';
-import { ToolsService } from 'src/admin/tools/tools.service'
+import { FocusService } from 'src/admin/focus/focus.service';
+import { ToolsService } from 'src/admin/tools/tools.service';
+import { CreateFocusDto } from 'src/admin/focus/dto/focus.dto';
 
 @Controller(`${Config.adminPath}/focus`)
 @ApiTags('图片上传')
 export class FocusController {
-  constructor(private toolsService: ToolsService) {}
+  constructor(private toolsService: ToolsService, private focusService: FocusService) {}
 
-  @Post()
+  @Post('upload')
   @ApiOperation({ summary: '图片上传' })
-  @UseInterceptors(FilesInterceptor('files'))
-  async index(@Body() body, @UploadedFiles() files) {
-    console.log(body);
+  @UseInterceptors(FileInterceptor('file'))
+  async upload(@Body() body, @UploadedFile() file) {
 
-    const saveDir = this.toolsService.uploadFile(files[0]);
-    console.log(saveDir);
+    const {saveDir} = this.toolsService.uploadFile(file)
 
-    return '上传成功';
+    return { code: 200, msg: '上传成功', data: { url: `/${saveDir}` } }
+  }
+
+  @Post('findAll')
+  @ApiOperation({ summary: '图片列表' })
+  async findAll() {
+    const result = await this.focusService.find({})
+    return { code: 200, data: { list: result } }
+  }
+
+  @Post('findOne')
+  @ApiOperation({ summary: '图片详情' })
+  async findOne(@Body('id') id: string) {
+    const role = await this.focusService.findOne(id)
+    return {code: 200, data: role}
+  }
+
+  @Post('create')
+  @ApiOperation({ summary: '创建图片' })
+  async create(@Body() body: CreateFocusDto) {
+    await this.focusService.create(body)
+    return { code: 200, data: {} }
   }
 }

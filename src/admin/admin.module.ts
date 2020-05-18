@@ -11,7 +11,8 @@ import { GoodsCate } from '../model/goods_cate.model';
 import { Goods } from '../model/goods.model';
 import { GoodsColor } from '../model/goods_color.model';
 import { GoodsImage } from '../model/goods_image.model';
-import { GoodsAttr } from '../model/goods_attr.model'
+import { GoodsAttr } from '../model/goods_attr.model';
+import { Focus } from '../model/focus.model'
 
 import { RoleController } from './role/role.controller';
 import { UserController } from './user/user.controller';
@@ -37,6 +38,7 @@ import { GoodsColorService } from '../service/goods-color/goods-color.service';
 import { GoodsService } from '../service/goods/goods.service';
 import { GoodsImageService } from '../service/goods-image/goods-image.service';
 import { GoodsAttrService } from '../service/goods-attr/goods-attr.service';
+import { FocusService } from './focus/focus.service';
 
 @Module({
   imports: [
@@ -51,11 +53,12 @@ import { GoodsAttrService } from '../service/goods-attr/goods-attr.service';
       { typegooseClass: Goods, schemaOptions: { collection: 'goods' } },
       { typegooseClass: GoodsColor, schemaOptions: { collection: 'goods_color' } },
       { typegooseClass: GoodsImage, schemaOptions: { collection: 'goods_image' } },
-      { typegooseClass: GoodsAttr, schemaOptions: { collection: 'goods_attr' } }
+      { typegooseClass: GoodsAttr, schemaOptions: { collection: 'goods_attr' } },
+      { typegooseClass: Focus, schemaOptions: { collection: 'focus' } },
     ])
   ],
   controllers: [RoleController, UserController, AccessController, RoleAccessController, FocusController, GoodsTypeController, GoodsTypeAttributeController, GoodsCateController, GoodsColorController, GoodsController, EnumController],
-  providers: [RoleService, UserService, AccessService, RoleAccessService, ToolsService, GoodsTypeService, GoodsTypeAttributeService, GoodsCateService, GoodsColorService, GoodsService, GoodsImageService, GoodsAttrService],
+  providers: [RoleService, UserService, AccessService, RoleAccessService, ToolsService, GoodsTypeService, GoodsTypeAttributeService, GoodsCateService, GoodsColorService, GoodsService, GoodsImageService, GoodsAttrService, FocusService],
   exports: [RoleAccessService]
 })
 export class AdminModule {}

@@ -53,9 +53,9 @@ export class AccessController {
     return {code: 200, data: {}}
   }
 
-  @Delete(':id')
+  @Post('delete')
   @ApiOperation({ summary: '删除权限' })
-  async remove(@Param('id') id: string) {
+  async delete(@Body('id') id: string) {
     await this.accessService.delete(id)
     return {code: 200, data: {}}
   }
