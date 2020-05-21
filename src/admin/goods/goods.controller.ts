@@ -1,12 +1,12 @@
 import { Controller, Get, Post, Put, Delete, Body, Param, UseInterceptors, UploadedFile, Query } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { GoodsService } from 'src/service/goods/goods.service';
+import { GoodsService } from 'src/admin/goods/goods.service';
 import { GoodsImageService } from 'src/service/goods-image/goods-image.service';
 import { GoodsTypeAttributeService } from 'src/service/goods-type-attribute/goods-type-attribute.service';
 import { GoodsAttrService } from 'src/service/goods-attr/goods-attr.service'
 import { ToolsService } from 'src/admin/tools/tools.service'
-import { CreateGoodsDto } from 'src/dto/goods.dto';
+import { CreateGoodsDto } from 'src/admin/goods/dto/goods.dto';
 import { Config } from 'src/config/config';
 
 @Controller(`${Config.adminPath}/goods`)
@@ -20,7 +20,7 @@ export class GoodsController {
     private toolsService: ToolsService
   ) {}
 
-  @Get()
+  @Post('findAll')
   @ApiOperation({ summary: '商品列表' })
   async index(@Query() query) {
     // 分页 搜索商品数据
@@ -31,21 +31,16 @@ export class GoodsController {
       json = Object.assign(json, {"title": { $regex: new RegExp(keyword) }});
     }
 
-    const page = query.page || 1;
-    const pageSize = 3;
-    const skip = (page - 1) * pageSize;
+    const page = query.page || 1
+    const pageSize = 3
+    const skip = (page - 1) * pageSize
     const goodsResult = await this.goodsService.find(json, skip, pageSize)
 
     const count = await this.goodsService.count(json)
 
-    const totalPages = Math.ceil(count / pageSize);
+    const totalPages = Math.ceil(count / pageSize)
 
-    return {
-      goodsList: goodsResult,
-      page,
-      totalPages,
-      keyword
-    }
+    return {code: 200, data: {list: goodsResult, page, totalPages, keyword}}
   }
 
   @Post()

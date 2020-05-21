@@ -1,7 +1,7 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Post, Put, Body, Param } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { GoodsCateService } from '../../service/goods-cate/goods-cate.service';
-import { CreateGoodsCateDto } from '../../dto/goods_cate.dto';
+import { GoodsCateService } from './goods-cate.service';
+import { CreateGoodsCateDto } from './dto/goods_cate.dto';
 import { Config } from '../../config/config';
 
 @Controller(`${Config.adminPath}/goods-cate`)
@@ -9,7 +9,7 @@ import { Config } from '../../config/config';
 export class GoodsCateController {
   constructor(private readonly goodsCateService: GoodsCateService) {}
 
-  @Get()
+  @Post('findAll')
   @ApiOperation({ summary: '商品分类列表' })
   async index() {
     const result = await this.goodsCateService.getModel().aggregate([
@@ -18,7 +18,7 @@ export class GoodsCateController {
           from: 'goods_cate',
           localField: '_id',
           foreignField: 'pid',
-          as: 'items'
+          as: 'children'
         }
       },
       {
@@ -27,26 +27,33 @@ export class GoodsCateController {
         }
       }
     ])
-    return result
+    return {code: 200, data: {list: result}}
   }
 
-  @Post()
+  @Post('findOne')
+  @ApiOperation({ summary: '商品分类详情' })
+  async findOne(@Body('id') id: string) {
+    const role = await this.goodsCateService.findOne(id)
+    return {code: 200, data: role}
+  }
+
+  @Post('create')
   @ApiOperation({ summary: '创建商品分类' })
   async create(@Body() body: CreateGoodsCateDto) {
     await this.goodsCateService.create(body)
     return {code: 200, data: {}}
   }
 
-  @Put(':id')
-  @ApiOperation({ summary: '编辑商品分类' })
-  async update(@Param('id') id: string, @Body() body: CreateGoodsCateDto) {
-    await this.goodsCateService.update(id, body)
+  @Post('update')
+  @ApiOperation({ summary: '更新商品分类' })
+  async update(@Body() body: CreateGoodsCateDto) {
+    await this.goodsCateService.update(body.id, body)
     return {code: 200, data: {}}
   }
 
-  @Delete(':id')
+  @Post('delete')
   @ApiOperation({ summary: '删除商品分类' })
-  async remove(@Param('id') id: string) {
+  async delete(@Body('id') id: string) {
     await this.goodsCateService.delete(id)
     return {code: 200, data: {}}
   }

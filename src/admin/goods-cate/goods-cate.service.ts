@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from '@typegoose/typegoose/lib/types';
 import { GoodsCate as GoodsCateModel } from '../../model/goods_cate.model';
-import { CreateGoodsCateDto } from '../../dto/goods_cate.dto';
+import { CreateGoodsCateDto } from './dto/goods_cate.dto';
 import * as mongoose from 'mongoose';
 const { ObjectId } = mongoose.Types;
 
@@ -12,6 +12,10 @@ export class GoodsCateService {
 
   async find(body?) {
     return await this.goodsCateModel.find(body)
+  }
+
+  async findOne(id) {
+    return await this.goodsCateModel.findById(id)
   }
 
   async create(body: CreateGoodsCateDto) {

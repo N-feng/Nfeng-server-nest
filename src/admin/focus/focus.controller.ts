@@ -41,4 +41,11 @@ export class FocusController {
     await this.focusService.create(body)
     return { code: 200, data: {} }
   }
+
+  @Post('update')
+  @ApiOperation({ summary: '更新图片' })
+  async update(@Body() body: CreateFocusDto) {
+    await this.focusService.update(body.id, body)
+    return {code: 200, data: {}}
+  }
 }

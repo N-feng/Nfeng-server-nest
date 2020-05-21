@@ -2,6 +2,8 @@ import { IsNotEmpty } from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger'
 
 export class CreateFocusDto {
+  @ApiPropertyOptional({ description: '图片ID' })
+  id: string
   @ApiPropertyOptional({ description: '分类：1、网站 2、APP 3、小程序', example: 1 })
   @IsNotEmpty({ message: '请选择分类' })
   type: number

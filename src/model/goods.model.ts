@@ -6,7 +6,7 @@ export class Goods {
   @prop()
   title: string
   @prop()
-  sub_title: string
+  subTitle: string
   @prop()
   goods_sn: string
   @prop()

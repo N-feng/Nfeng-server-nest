@@ -6,7 +6,7 @@ export class GoodsCate {
   @prop()
   title: string
   @prop()
-  cate_img: string
+  cateImg: string
   @prop()
   link: string
   @prop()
@@ -14,7 +14,7 @@ export class GoodsCate {
   @prop()
   pid: mongoose.Schema.Types.Mixed // 混合类型
   @prop()
-  sub_title: string // seo相关标题 关键词 描述
+  subTitle: string // seo相关标题 关键词 描述
   @prop()
   keywords: string
   @prop()

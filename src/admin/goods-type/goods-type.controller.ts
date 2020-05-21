@@ -1,37 +1,38 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { GoodsTypeService } from '../../service/goods-type/goods-type.service';
-import { CreateGoodsTypeDto } from '../../dto/goods_type.dto';
-import { Config } from '../../config/config';
+import { GoodsTypeService } from './goods-type.service';
+import { CreateGoodsTypeDto } from './dto/goods_type.dto';
+import { Config } from 'src/config/config';
 
 @Controller(`${Config.adminPath}/goods-type`)
 @ApiTags('商品类型')
 export class GoodsTypeController {
   constructor(private readonly goodsTypeService: GoodsTypeService) {}
 
-  @Get()
+  @Post('findAll')
   @ApiOperation({ summary: '商品类型列表' })
   async index() {
-    return await this.goodsTypeService.find()
+    const res = await this.goodsTypeService.find()
+    return {code: 200, data: { list: res }}
   }
 
-  @Post()
+  @Post('create')
   @ApiOperation({ summary: '创建商品类型' })
   async create(@Body() body: CreateGoodsTypeDto) {
     await this.goodsTypeService.create(body)
     return {code: 200, data: {}}
   }
 
-  @Put(':id')
+  @Post('update')
   @ApiOperation({ summary: '编辑商品类型' })
-  async update(@Param('id') id: string, @Body() body: CreateGoodsTypeDto) {
-    await this.goodsTypeService.update(id, body)
+  async update(@Body() body: CreateGoodsTypeDto) {
+    await this.goodsTypeService.update(body.id, body)
     return {code: 200, data: {}}
   }
 
-  @Delete(':id')
+  @Post('delete')
   @ApiOperation({ summary: '删除商品类型' })
-  async remove(@Param('id') id: string) {
+  async delete(@Body('id') id: string) {
     await this.goodsTypeService.delete(id)
     return {code: 200, data: {}}
   }

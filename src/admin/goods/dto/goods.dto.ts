@@ -4,7 +4,7 @@ export class CreateGoodsDto {
   @ApiPropertyOptional({ description: '商品名称' })
   title: string
   @ApiPropertyOptional({ description: '二级标题' })
-  sub_title: string
+  subTitle: string
   @ApiPropertyOptional({ description: '货号' })
   goods_sn: string
   @ApiPropertyOptional({ description: '商品分类' })
