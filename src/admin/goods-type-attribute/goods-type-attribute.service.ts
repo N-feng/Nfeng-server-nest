@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from '@typegoose/typegoose/lib/types';
 import { GoodsTypeAttribute as GoodsTypeAttributeModel } from '../../model/goods_type_attribute.model';
-import { CreateGoodsTypeAttributeDto } from '../../dto/goods_type_attribute.dto';
+import { CreateGoodsTypeAttributeDto } from './dto/goods_type_attribute.dto';
 
 @Injectable()
 export class GoodsTypeAttributeService {

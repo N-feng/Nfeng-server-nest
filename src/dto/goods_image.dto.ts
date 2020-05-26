@@ -2,9 +2,9 @@ import { ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateGoodsImageDto {
   @ApiPropertyOptional({ description: '商品ID' })
-  goods_id: string
+  goodsId: string
   @ApiPropertyOptional({ description: '图片地址' })
-  img_url: string
+  imgUrl: string
   // @ApiPropertyOptional({ description: '图片颜色' })
   // color_id: number
   // @ApiPropertyOptional({ description: '图片排序' })

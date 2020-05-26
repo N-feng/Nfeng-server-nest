@@ -1,4 +1,4 @@
-import { Controller, Post, Put, Body, Param } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { GoodsCateService } from './goods-cate.service';
 import { CreateGoodsCateDto } from './dto/goods_cate.dto';

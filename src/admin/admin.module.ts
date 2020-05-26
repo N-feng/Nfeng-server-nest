@@ -32,7 +32,7 @@ import { RoleService } from './role/role.service';
 import { AccessService } from './access/access.service';
 import { RoleAccessService } from './role-access/role-access.service';
 import { GoodsTypeService } from './goods-type/goods-type.service';
-import { GoodsTypeAttributeService } from '../service/goods-type-attribute/goods-type-attribute.service';
+import { GoodsTypeAttributeService } from './goods-type-attribute/goods-type-attribute.service';
 import { GoodsCateService } from './goods-cate/goods-cate.service';
 import { GoodsColorService } from '../service/goods-color/goods-color.service';
 import { GoodsService } from './goods/goods.service';

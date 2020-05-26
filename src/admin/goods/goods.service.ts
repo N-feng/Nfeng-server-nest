@@ -16,6 +16,10 @@ export class GoodsService {
     return await this.goodsModel.find(body).count()
   }
 
+  async findOne(id) {
+    return await this.goodsModel.findById(id)
+  }
+
   async create(body: CreateGoodsDto) {
     return await this.goodsModel.create(body)
   }

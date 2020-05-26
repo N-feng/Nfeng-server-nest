@@ -8,49 +8,49 @@ export class Goods {
   @prop()
   subTitle: string
   @prop()
-  goods_sn: string
+  goodsSn: string
   @prop()
-  goods_cate_id: mongoose.Schema.Types.ObjectId
+  goodsCateId: mongoose.Schema.Types.ObjectId
   @prop({ default: 100 })
-  click_count: number
+  clickCount: number
   @prop({ default: 1000 })
-  goods_number: number
+  goodsNumber: number
   @prop()
-  shop_price: number
+  shopPrice: number
   @prop()
-  market_price: number
+  marketPrice: number
   @prop()
-  relation_goods: string
+  relationGoods: string
   @prop()
-  goods_attrs: string
+  goodsAttrs: string
   @prop()
-  goods_version: string /*版本*/
+  goodsVersion: string /*版本*/
   @prop()
-  goods_img: string
+  goodsImg: string
   @prop()
-  goods_gift: string
+  goodsGift: string
   @prop()
-  goods_fitting: string
+  goodsFitting: string
   @prop()
-  goods_color: string
+  goodsColor: string
   @prop()
-  goods_keywords: string
+  goodsKeywords: string
   @prop()
-  goods_desc: string
+  goodsDesc: string
   @prop()
-  goods_content: string
+  goodsContent: string
   @prop({ default: 100 })
   sort: number
   @prop()
-  is_delete: number
+  isDelete: number
   @prop()
-  is_hot: number
+  isHot: number
   @prop()
-  is_best: number
+  isBest: number
   @prop()
-  is_new: number
+  isLatest: number
   @prop()
-  goods_type_id: mongoose.Schema.Types.ObjectId
+  goodsTypeId: mongoose.Schema.Types.ObjectId
   @prop({ default: 1 })
   status: number
   @prop({ default: d.getTime() })

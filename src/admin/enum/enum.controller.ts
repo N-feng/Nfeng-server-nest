@@ -52,7 +52,7 @@ export class EnumController {
   }
 
   @Post('findGoodsCate')
-  @ApiOperation({ summary: '商品类型列表' })
+  @ApiOperation({ summary: '商品分类枚举' })
   async index() {
     const result = await this.goodsCateService.find({'pid': '0'})
     const list = [{

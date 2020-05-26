@@ -4,13 +4,13 @@ const d = new Date();
 
 export class GoodsImage {
   @prop()
-  goods_id: mongoose.Schema.Types.ObjectId
+  goodsId: mongoose.Schema.Types.ObjectId
   @prop()
-  img_url: string
+  imgUrl: string
   @prop()
   color_id: mongoose.Schema.Types.Mixed
   @prop()
-  cate_id: mongoose.Schema.Types.ObjectId
+  cateId: mongoose.Schema.Types.ObjectId
   @prop({ default: 100 })
   sort: number
   @prop({ default: 1 })

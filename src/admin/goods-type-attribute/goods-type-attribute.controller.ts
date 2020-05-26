@@ -1,21 +1,45 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Post, Put, Delete, Body, Param } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { GoodsTypeAttributeService } from 'src/service/goods-type-attribute/goods-type-attribute.service';
-import { CreateGoodsTypeAttributeDto } from 'src/dto/goods_type_attribute.dto';
+import { GoodsTypeAttributeService } from 'src/admin/goods-type-attribute/goods-type-attribute.service';
+import { CreateGoodsTypeAttributeDto } from 'src/admin/goods-type-attribute/dto/goods_type_attribute.dto';
 import { Config } from 'src/config/config';
+import * as mongoose from 'mongoose';
+const { ObjectId } = mongoose.Types;
 
 @Controller(`${Config.adminPath}/goods-type-attribute`)
 @ApiTags('商品属性')
 export class GoodsTypeAttributeController {
-  constructor(private readonly goodsTypeAttributeService: GoodsTypeAttributeService) {}
+  constructor(
+    private readonly goodsTypeAttributeService: GoodsTypeAttributeService,
+  ) {}
 
-  @Get(':id')
+  @Post('findAll')
   @ApiOperation({ summary: '商品属性列表' })
-  async index(@Param('id') id: string) {
-    return await this.goodsTypeAttributeService.find({cate_id: id})
+  async index(@Body('id') id: string) {
+    const result = await this.goodsTypeAttributeService.getModel().aggregate([
+      {
+        $lookup: {
+          from: "goods_type",
+          localField: "cateId",
+          foreignField: "_id",
+          as: "cate"
+        }
+      },
+      {
+        $match: {
+          cateId: new ObjectId(id)
+        }
+      }
+    ])
+    const list = result.map((item) => {
+      item.cateName = item.cate[0].title
+      delete item.cate
+      return item
+    })
+    return { code: 200, data: { list }  }
   }
 
-  @Post()
+  @Post('create')
   @ApiOperation({ summary: '创建商品属性' })
   async create(@Body() body: CreateGoodsTypeAttributeDto) {
     await this.goodsTypeAttributeService.create(body)

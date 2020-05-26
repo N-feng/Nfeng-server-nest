@@ -51,7 +51,12 @@ export class UserController {
         }
       }
     ])
-    return { code: 200, data: { list: result } }
+    const list = result.map((item) => {
+      item.roleName = item.role[0].title
+      delete item.role
+      return item
+    })
+    return { code: 200, data: { list } }
   }
 
   @Get('findOne')

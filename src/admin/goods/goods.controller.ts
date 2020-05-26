@@ -1,9 +1,9 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, UseInterceptors, UploadedFile, Query } from '@nestjs/common';
+import { Controller, Post, Put, Delete, Body, Param, UseInterceptors, UploadedFile, Query } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { GoodsService } from 'src/admin/goods/goods.service';
 import { GoodsImageService } from 'src/service/goods-image/goods-image.service';
-import { GoodsTypeAttributeService } from 'src/service/goods-type-attribute/goods-type-attribute.service';
+import { GoodsTypeAttributeService } from 'src/admin/goods-type-attribute/goods-type-attribute.service';
 import { GoodsAttrService } from 'src/service/goods-attr/goods-attr.service'
 import { ToolsService } from 'src/admin/tools/tools.service'
 import { CreateGoodsDto } from 'src/admin/goods/dto/goods.dto';
@@ -43,47 +43,50 @@ export class GoodsController {
     return {code: 200, data: {list: goodsResult, page, totalPages, keyword}}
   }
 
-  @Post()
+  @Post('findOne')
+  @ApiOperation({ summary: '商品详情' })
+  async findOne(@Body('id') id: string) {
+    const role = await this.goodsService.findOne(id)
+    return {code: 200, data: role}
+  }
+
+  @Post('create')
   @ApiOperation({ summary: '创建商品' })
-  @UseInterceptors(FileInterceptor('goods_img'))
-  async create(@Body() body: CreateGoodsDto, @UploadedFile() file) {
-    const {saveDir} = this.toolsService.uploadFile(file);
+  @UseInterceptors(FileInterceptor('goodsImg'))
+  async create(@Body() body: CreateGoodsDto) {
 
     // 1、增加商品数据
-    const result = await this.goodsService.create(Object.assign(body, {
-      goods_color: body.goods_color.join(','),
-      goods_img: saveDir
-    }));
+    const result = await this.goodsService.create(body)
 
     // 2、增加图库
-    const {goods_image_list} = body
+    const {goodsImageList} = body
 
-    if (result._id) {
-      for (let i = 0; i < goods_image_list.length; i++) {
+    if (result._id && goodsImageList) {
+      for (let i = 0; i < goodsImageList.length; i++) {
         await this.goodsImageService.create({
-          goods_id: result._id,
-          img_url: goods_image_list[i]
+          goodsId: result._id,
+          imgUrl: goodsImageList[i]
         })
       }
     }
 
     // 3、增加商品属性
-    const {attr_id_list, attr_value_list} = body
+    const {attrIdList, attrValueList} = body
 
-    if (result._id) {
-      for (let i = 0; i < attr_id_list.length; i++) {
+    if (result._id && attrIdList) {
+      for (let i = 0; i < attrIdList.length; i++) {
         // 获取当前 商品类型id对应的商品类型属性
-        const goodsTypeAttributeResult = await this.goodsTypeAttributeService.find({ _id: attr_id_list[i] });
+        const goodsTypeAttributeResult = await this.goodsTypeAttributeService.find({ _id: attrIdList[i] });
 
         this.goodsAttrService.create({
-          goods_id: result._id,
+          goodsId: result._id,
           // 可能会用到的字段 开始
-          goods_cate_id: result.goods_cate_id,
-          attribute_id: attr_id_list[i],
-          attribute_type: goodsTypeAttributeResult[0].attr_type,
+          goodsCateId: result.goodsCateId,
+          attributeId: attrIdList[i],
+          attributeType: goodsTypeAttributeResult[0].attrType,
           // 可能会用到的字段 结束
-          attribute_title: goodsTypeAttributeResult[0].title,
-          attribute_value: attr_value_list[0],
+          attributeTitle: goodsTypeAttributeResult[0].title,
+          attributeValue: attrValueList[0],
         })
       }
     }
@@ -91,16 +94,16 @@ export class GoodsController {
     return {code: 200, data: {}}
   }
 
-  @Put(':id')
-  @ApiOperation({ summary: '编辑商品' })
-  async update(@Param('id') id: string, @Body() body: CreateGoodsDto) {
-    await this.goodsService.update(id, body)
+  @Post('update')
+  @ApiOperation({ summary: '更新商品' })
+  async update(@Body() body: CreateGoodsDto) {
+    await this.goodsService.update(body.id, body)
     return {code: 200, data: {}}
   }
 
-  @Delete(':id')
+  @Post('delete')
   @ApiOperation({ summary: '删除商品' })
-  async remove(@Param('id') id: string) {
+  async delete(@Body('id') id: string) {
     await this.goodsService.delete(id)
     return {code: 200, data: {}}
   }
