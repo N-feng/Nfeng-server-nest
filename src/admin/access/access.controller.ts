@@ -29,34 +29,34 @@ export class AccessController {
         }
       }
     ])
-    return { code: 200, data: { list: result } }
+    return { status: 200, data: { list: result } }
   }
 
   @Post('findOne')
   @ApiOperation({ summary: '权限详情' })
   async findOne(@Body('id') id: string) {
     const role = await this.accessService.findOne(id)
-    return {code: 200, data: role}
+    return {status: 200, data: role}
   }
 
   @Post('create')
   @ApiOperation({ summary: '创建权限' })
   async create(@Body() body: CreateAccessDto) {
     await this.accessService.create(body)
-    return {code: 200, data: {}}
+    return {status: 200, data: {}}
   }
 
   @Post('update')
   @ApiOperation({ summary: '更新权限' })
   async update(@Body() body: CreateAccessDto) {
     await this.accessService.update(body.id, body)
-    return {code: 200, data: {}}
+    return {status: 200, data: {}}
   }
 
   @Post('delete')
   @ApiOperation({ summary: '删除权限' })
   async delete(@Body('id') id: string) {
     await this.accessService.delete(id)
-    return {code: 200, data: {}}
+    return {status: 200, data: {}}
   }
 }

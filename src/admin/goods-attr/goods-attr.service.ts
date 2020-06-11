@@ -2,9 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from '@typegoose/typegoose/lib/types';
 import { GoodsAttr as GoodsAttrModel } from '../../model/goods_attr.model';
-import { CreateGoodsAttrDto } from '../../dto/goods_attr.dto';
-import * as mongoose from 'mongoose';
-const { ObjectId } = mongoose.Types;
+import { CreateGoodsAttrDto } from './dto/goods_attr.dto';
 
 @Injectable()
 export class GoodsAttrService {
@@ -24,6 +22,10 @@ export class GoodsAttrService {
 
   async delete(id: string) {
     await this.goodsAttrModel.findByIdAndDelete(id)
+  }
+
+  async deleteMany(body) {
+    return await this.goodsAttrModel.deleteMany(body)
   }
 
   getModel() {

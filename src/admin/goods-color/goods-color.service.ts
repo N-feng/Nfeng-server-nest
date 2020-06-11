@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from '@typegoose/typegoose/lib/types';
 import { GoodsColor as GoodsColorModel } from '../../model/goods_color.model';
-import { CreateGoodsColorDto } from '../../dto/goods_color.dto';
+import { CreateGoodsColorDto } from './dto/goods_color.dto';
 
 @Injectable()
 export class GoodsColorService {
@@ -10,6 +10,10 @@ export class GoodsColorService {
 
   async find(body?) {
     return await this.goodsColorModel.find(body)
+  }
+
+  async findOne(id) {
+    return await this.goodsColorModel.findById(id)
   }
 
   async create(body: CreateGoodsColorDto) {

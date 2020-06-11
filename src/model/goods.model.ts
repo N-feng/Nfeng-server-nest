@@ -32,7 +32,7 @@ export class Goods {
   @prop()
   goodsFitting: string
   @prop()
-  goodsColor: string
+  goodsColor: string[]
   @prop()
   goodsKeywords: string
   @prop()

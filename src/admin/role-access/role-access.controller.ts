@@ -17,7 +17,7 @@ export class RoleAccessController {
   async findOne(@Body('id') id: string) {
     const roleId = new ObjectId(id)
     const result = await this.roleAccessService.find({ roleId })
-    return { code: 200, data: { list: result } }
+    return { status: 200, data: { list: result } }
   }
 
   @Post('update')
@@ -40,7 +40,7 @@ export class RoleAccessController {
       })
     }
 
-    return { code: 200, data: {} }
+    return { status: 200, data: {} }
   }
 
 }

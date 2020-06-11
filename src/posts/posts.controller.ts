@@ -32,7 +32,7 @@ export class PostsController {
   @ApiOperation({ summary: '创建帖子' })
   async create(@Body() createPostDto: CreatePostDto) {
     await this.postModel.create(createPostDto)
-    return {code: 200, data: {}}
+    return {status: 200, data: {}}
   }
 
   @Get(':id')
@@ -45,13 +45,13 @@ export class PostsController {
   @ApiOperation({summary: '编辑帖子'})
   async update(@Param('id') id: string, @Body() updatePostDto: CreatePostDto) {
     await this.postModel.findByIdAndUpdate(id, updatePostDto)
-    return {code: 200, data: {}}
+    return {status: 200, data: {}}
   }
 
   @Delete(':id')
   @ApiOperation({summary: '删除帖子'})
   async remove(@Param('id') id: string) {
     await this.postModel.findByIdAndDelete(id)
-    return {code: 200, data: {}}
+    return {status: 200, data: {}}
   }
 }

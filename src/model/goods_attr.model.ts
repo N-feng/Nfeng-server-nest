@@ -9,7 +9,7 @@ export class GoodsAttr {
   @prop()
   goodsCateId: mongoose.Schema.Types.ObjectId
   @prop()
-  attribute_cate_id: mongoose.Schema.Types.ObjectId
+  attributeCateId: mongoose.Schema.Types.ObjectId
   @prop()
   attributeId: mongoose.Schema.Types.ObjectId
   @prop()

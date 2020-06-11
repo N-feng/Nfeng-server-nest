@@ -56,7 +56,7 @@ export class UserController {
       delete item.role
       return item
     })
-    return { code: 200, data: { list } }
+    return { status: 200, data: { list } }
   }
 
   @Get('findOne')
@@ -64,7 +64,7 @@ export class UserController {
   async findOne(@Query('id') id: string) {
     const user = await this.userService.findOne(id)
     user.password = ''
-    return { code: 200, data: user }
+    return { status: 200, data: user }
   }
 
   @Post('create')
@@ -72,21 +72,21 @@ export class UserController {
   async create(@Body() body: CreateUserDto) {
     const password = this.toolsService.getMd5(body.password)
     await this.userService.create({ ...body, password })
-    return { code: 200, data: {} }
+    return { status: 200, data: {} }
   }
 
   @Put(':id')
   @ApiOperation({ summary: '编辑用户' })
   async update(@Param('id') id: string, @Body() body: CreateUserDto) {
     await this.userService.update(id, body)
-    return { code: 200, data: {} }
+    return { status: 200, data: {} }
   }
 
   @Get('remove')
   @ApiOperation({ summary: '删除用户' })
   async remove(@Query('id') id: string) {
     this.userService.delete(id)
-    return { code: 200, data: {} }
+    return { status: 200, data: {} }
   }
 
   @Post('login')
@@ -96,7 +96,7 @@ export class UserController {
     const userResult = await this.userService.find({ ...body, password })
     if (userResult.length > 0) {
       req.session.userInfo = userResult[0]
-      return { code: 200, msg: '登录成功' }
+      return { status: 200, msg: '登录成功' }
     } else {
       throw new BadRequestException({ code: 400, msg: '用户名或者密码不正确' })
     }
@@ -159,7 +159,7 @@ export class UserController {
 
     const returnTree = convert(menus)
 
-    return { code: 200, data: { menus: returnTree.filter((item) => item.children && item.children.length) } }
+    return { status: 200, data: { menus: returnTree.filter((item) => item.children && item.children.length) } }
   }
 
 }

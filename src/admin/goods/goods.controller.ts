@@ -1,11 +1,10 @@
-import { Controller, Post, Put, Delete, Body, Param, UseInterceptors, UploadedFile, Query } from '@nestjs/common';
+import { Controller, Post, Body, UseInterceptors, Query } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { GoodsService } from 'src/admin/goods/goods.service';
-import { GoodsImageService } from 'src/service/goods-image/goods-image.service';
+import { GoodsImageService } from 'src/admin/goods-image/goods-image.service';
 import { GoodsTypeAttributeService } from 'src/admin/goods-type-attribute/goods-type-attribute.service';
-import { GoodsAttrService } from 'src/service/goods-attr/goods-attr.service'
-import { ToolsService } from 'src/admin/tools/tools.service'
+import { GoodsAttrService } from 'src/admin/goods-attr/goods-attr.service';
 import { CreateGoodsDto } from 'src/admin/goods/dto/goods.dto';
 import { Config } from 'src/config/config';
 
@@ -17,7 +16,6 @@ export class GoodsController {
     private goodsImageService: GoodsImageService,
     private goodsTypeAttributeService: GoodsTypeAttributeService,
     private goodsAttrService: GoodsAttrService,
-    private toolsService: ToolsService
   ) {}
 
   @Post('findAll')
@@ -40,14 +38,14 @@ export class GoodsController {
 
     const totalPages = Math.ceil(count / pageSize)
 
-    return {code: 200, data: {list: goodsResult, page, totalPages, keyword}}
+    return {status: 200, data: {list: goodsResult, page, totalPages, keyword}}
   }
 
   @Post('findOne')
   @ApiOperation({ summary: '商品详情' })
   async findOne(@Body('id') id: string) {
     const role = await this.goodsService.findOne(id)
-    return {code: 200, data: role}
+    return {status: 200, data: role}
   }
 
   @Post('create')
@@ -86,25 +84,52 @@ export class GoodsController {
           attributeType: goodsTypeAttributeResult[0].attrType,
           // 可能会用到的字段 结束
           attributeTitle: goodsTypeAttributeResult[0].title,
-          attributeValue: attrValueList[0],
+          attributeValue: attrValueList[i],
         })
       }
     }
 
-    return {code: 200, data: {}}
+    return {status: 200, data: {}}
   }
 
   @Post('update')
   @ApiOperation({ summary: '更新商品' })
   async update(@Body() body: CreateGoodsDto) {
-    await this.goodsService.update(body.id, body)
-    return {code: 200, data: {}}
+
+    // 1、修改商品数据
+    const result = await this.goodsService.update(body.id, body)
+
+    // 3、修改商品属性
+    const {attrIdList, attrValueList} = body
+    const goodsId = body.id
+
+    await this.goodsAttrService.deleteMany({ goodsId })
+
+    if (goodsId && attrIdList) {
+      for (let i = 0; i < attrIdList.length; i++) {
+        // 获取当前 商品类型id对应的商品类型属性
+        const goodsTypeAttributeResult = await this.goodsTypeAttributeService.find({ _id: attrIdList[i] });
+
+        this.goodsAttrService.create({
+          goodsId,
+          // 可能会用到的字段 开始
+          goodsCateId: result.goodsCateId,
+          attributeId: attrIdList[i],
+          attributeType: goodsTypeAttributeResult[0].attrType,
+          // 可能会用到的字段 结束
+          attributeTitle: goodsTypeAttributeResult[0].title,
+          attributeValue: attrValueList[i],
+        })
+      }
+    }
+
+    return {status: 200, data: {}}
   }
 
   @Post('delete')
   @ApiOperation({ summary: '删除商品' })
   async delete(@Body('id') id: string) {
     await this.goodsService.delete(id)
-    return {code: 200, data: {}}
+    return {status: 200, data: {}}
   }
 }

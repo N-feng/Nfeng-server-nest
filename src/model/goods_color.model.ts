@@ -2,9 +2,9 @@ import { prop } from '@typegoose/typegoose';
 
 export class GoodsColor {
   @prop()
-  color_name: string
+  colorName: string
   @prop()
-  color_value: string
+  colorValue: string
   @prop({ default: 1 })
   status: number
 }
