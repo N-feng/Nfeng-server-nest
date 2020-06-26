@@ -16,6 +16,6 @@ export class GoodsAttrController {
   async findAll(@Body() body) {
     const goodsId = new ObjectId(body.id)
     const result = await this.goodsAttrService.find({goodsId})
-    return {status: 200, data: {list: result}}
+    return {code: 200, data: {list: result}}
   }
 }

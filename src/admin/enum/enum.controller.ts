@@ -30,7 +30,7 @@ export class EnumController {
         }
       })
     ]
-    return { status: 200, data: { list } }
+    return { code: 200, data: { list } }
   }
 
   @Get('findModules')
@@ -52,7 +52,7 @@ export class EnumController {
         value: item._id,
       }
     })]
-    return { status: 200, data: { list } }
+    return { code: 200, data: { list } }
   }
 
   @Get('findGoodsCate')
@@ -67,7 +67,7 @@ export class EnumController {
     if (body.pid && body.pid === '0') {
       list.unshift({ label: '顶级分类', value: '0' })
     }
-    return {status: 200, data: { list }}
+    return {code: 200, data: { list }}
   }
 
   @Get('findGoodsColor')
@@ -78,7 +78,7 @@ export class EnumController {
       label: item.colorName,
       value: item.colorValue
     }))
-    return {status: 200, data: { list }}
+    return {code: 200, data: { list }}
   }
 
   @Get('findGoodsType')
@@ -89,7 +89,7 @@ export class EnumController {
       label: item.title,
       value: item._id,
     }))
-    return {status: 200, data: { list }}
+    return {code: 200, data: { list }}
   }
 
 }

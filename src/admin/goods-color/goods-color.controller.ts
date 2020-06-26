@@ -13,34 +13,34 @@ export class GoodsColorController {
   @ApiOperation({ summary: '商品颜色列表' })
   async findAll() {
     const list = await this.goodsColorService.find()
-    return {status: 200, data: {list}}
+    return {code: 200, data: {list}}
   }
 
   @Post('findOne')
   @ApiOperation({ summary: '商品颜色详情' })
   async findOne(@Body('id') id: string) {
     const role = await this.goodsColorService.findOne(id)
-    return {status: 200, data: role}
+    return {code: 200, data: role}
   }
 
   @Post('create')
   @ApiOperation({ summary: '创建商品颜色' })
   async create(@Body() body: CreateGoodsColorDto) {
     await this.goodsColorService.create(body)
-    return {status: 200, data: {}}
+    return {code: 200, data: {}}
   }
 
   @Post('update')
   @ApiOperation({ summary: '编辑商品颜色' })
   async update(@Body() body: CreateGoodsColorDto) {
     await this.goodsColorService.update(body.id, body)
-    return {status: 200, data: {}}
+    return {code: 200, data: {}}
   }
 
   @Post('delete')
   @ApiOperation({ summary: '删除商品颜色' })
   async delete(@Body('id') id: string) {
     await this.goodsColorService.delete(id)
-    return {status: 200, data: {}}
+    return {code: 200, data: {}}
   }
 }

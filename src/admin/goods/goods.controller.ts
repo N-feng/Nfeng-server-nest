@@ -38,14 +38,14 @@ export class GoodsController {
 
     const totalPages = Math.ceil(count / pageSize)
 
-    return {status: 200, data: {list: goodsResult, page, totalPages, keyword}}
+    return {code: 200, data: {list: goodsResult, page, totalPages, keyword}}
   }
 
   @Post('findOne')
   @ApiOperation({ summary: '商品详情' })
   async findOne(@Body('id') id: string) {
     const role = await this.goodsService.findOne(id)
-    return {status: 200, data: role}
+    return {code: 200, data: role}
   }
 
   @Post('create')
@@ -89,7 +89,7 @@ export class GoodsController {
       }
     }
 
-    return {status: 200, data: {}}
+    return {code: 200, data: {}}
   }
 
   @Post('update')
@@ -123,13 +123,13 @@ export class GoodsController {
       }
     }
 
-    return {status: 200, data: {}}
+    return {code: 200, data: {}}
   }
 
   @Post('delete')
   @ApiOperation({ summary: '删除商品' })
   async delete(@Body('id') id: string) {
     await this.goodsService.delete(id)
-    return {status: 200, data: {}}
+    return {code: 200, data: {}}
   }
 }

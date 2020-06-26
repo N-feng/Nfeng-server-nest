@@ -18,34 +18,34 @@ export class FocusController {
 
     const {saveDir} = this.toolsService.uploadFile(file)
 
-    return { status: 200, msg: '上传成功', data: { url: `/${saveDir}` } }
+    return { code: 200, msg: '上传成功', data: { url: `/${saveDir}` } }
   }
 
   @Post('findAll')
   @ApiOperation({ summary: '图片列表' })
   async findAll() {
     const result = await this.focusService.find({})
-    return { status: 200, data: { list: result } }
+    return { code: 200, data: { list: result } }
   }
 
   @Post('findOne')
   @ApiOperation({ summary: '图片详情' })
   async findOne(@Body('id') id: string) {
     const role = await this.focusService.findOne(id)
-    return {status: 200, data: role}
+    return {code: 200, data: role}
   }
 
   @Post('create')
   @ApiOperation({ summary: '创建图片' })
   async create(@Body() body: CreateFocusDto) {
     await this.focusService.create(body)
-    return { status: 200, data: {} }
+    return { code: 200, data: {} }
   }
 
   @Post('update')
   @ApiOperation({ summary: '更新图片' })
   async update(@Body() body: CreateFocusDto) {
     await this.focusService.update(body.id, body)
-    return {status: 200, data: {}}
+    return {code: 200, data: {}}
   }
 }

@@ -27,34 +27,34 @@ export class GoodsCateController {
         }
       }
     ])
-    return {status: 200, data: {list: result}}
+    return {code: 200, data: {list: result}}
   }
 
   @Post('findOne')
   @ApiOperation({ summary: '商品分类详情' })
   async findOne(@Body('id') id: string) {
     const role = await this.goodsCateService.findOne(id)
-    return {status: 200, data: role}
+    return {code: 200, data: role}
   }
 
   @Post('create')
   @ApiOperation({ summary: '创建商品分类' })
   async create(@Body() body: CreateGoodsCateDto) {
     await this.goodsCateService.create(body)
-    return {status: 200, data: {}}
+    return {code: 200, data: {}}
   }
 
   @Post('update')
   @ApiOperation({ summary: '更新商品分类' })
   async update(@Body() body: CreateGoodsCateDto) {
     await this.goodsCateService.update(body.id, body)
-    return {status: 200, data: {}}
+    return {code: 200, data: {}}
   }
 
   @Post('delete')
   @ApiOperation({ summary: '删除商品分类' })
   async delete(@Body('id') id: string) {
     await this.goodsCateService.delete(id)
-    return {status: 200, data: {}}
+    return {code: 200, data: {}}
   }
 }

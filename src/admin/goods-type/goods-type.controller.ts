@@ -13,27 +13,27 @@ export class GoodsTypeController {
   @ApiOperation({ summary: '商品类型列表' })
   async index() {
     const res = await this.goodsTypeService.find()
-    return {status: 200, data: { list: res }}
+    return {code: 200, data: { list: res }}
   }
 
   @Post('create')
   @ApiOperation({ summary: '创建商品类型' })
   async create(@Body() body: CreateGoodsTypeDto) {
     await this.goodsTypeService.create(body)
-    return {status: 200, data: {}}
+    return {code: 200, data: {}}
   }
 
   @Post('update')
   @ApiOperation({ summary: '编辑商品类型' })
   async update(@Body() body: CreateGoodsTypeDto) {
     await this.goodsTypeService.update(body.id, body)
-    return {status: 200, data: {}}
+    return {code: 200, data: {}}
   }
 
   @Post('delete')
   @ApiOperation({ summary: '删除商品类型' })
   async delete(@Body('id') id: string) {
     await this.goodsTypeService.delete(id)
-    return {status: 200, data: {}}
+    return {code: 200, data: {}}
   }
 }

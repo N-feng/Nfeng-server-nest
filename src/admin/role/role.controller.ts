@@ -24,34 +24,34 @@ export class RoleController {
     const list = await this.roleService.find(query, skip, pageSize)
     const count = await this.roleService.count(query)
     const total = Math.ceil(count / pageSize);
-    return { status: 200, data: { list, total } }
+    return { code: 200, data: { list, total } }
   }
 
   @Post('findOne')
   @ApiOperation({ summary: '查询角色' })
   async findOne(@Body('id') id: string) {
     const role = await this.roleService.findOne(id)
-    return {status: 200, data: role}
+    return {code: 200, data: role}
   }
 
   @Post('create')
   @ApiOperation({ summary: '创建角色' })
   async create(@Body() body: CreateRoleDto) {
     await this.roleService.create(body)
-    return {status: 200, data: {}}
+    return {code: 200, data: {}}
   }
 
   @Post('update')
   @ApiOperation({ summary: '更新角色' })
   async update(@Body() body: CreateRoleDto) {
     await this.roleService.update(body)
-    return {status: 200, data: {}}
+    return {code: 200, data: {}}
   }
 
   @Delete(':id')
   @ApiOperation({ summary: '删除角色' })
   async remove(@Param('id') id: string) {
     await this.roleService.delete(id)
-    return {status: 200, data: {}}
+    return {code: 200, data: {}}
   }
 }
