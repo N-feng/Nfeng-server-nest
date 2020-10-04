@@ -12,11 +12,11 @@ export class User {
   @prop()
   email: string
   @prop({ default: 1 })
-  status: number
+  status?: number
   @prop()
-  roleId: mongoose.Schema.Types.ObjectId
+  roleId?: mongoose.Schema.Types.ObjectId
   @prop({ default: d.getTime() })
-  createAt: number
+  createAt?: number
   @prop()
-  isSuper: number
+  isSuper?: number
 }

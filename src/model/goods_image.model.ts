@@ -8,13 +8,13 @@ export class GoodsImage {
   @prop()
   imgUrl: string
   @prop()
-  color_id: mongoose.Schema.Types.Mixed
+  color_id?: mongoose.Schema.Types.Mixed
   @prop()
-  cateId: mongoose.Schema.Types.ObjectId
+  cateId?: mongoose.Schema.Types.ObjectId
   @prop({ default: 100 })
-  sort: number
+  sort?: number
   @prop({ default: 1 })
-  status: number
+  status?: number
   @prop({ default: d.getTime() })
-  createAt: number
+  createAt?: number
 }

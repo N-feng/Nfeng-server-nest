@@ -1,5 +1,6 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
+import * as mongoose from 'mongoose';
 
 export class CreateGoodsTypeAttributeDto {
   @ApiPropertyOptional({ description: '属性名称' })
@@ -7,7 +8,7 @@ export class CreateGoodsTypeAttributeDto {
   title: string
   @ApiPropertyOptional({ description: '所属类型' })
   @IsNotEmpty({ message: '所属类型不能为空' })
-  cateId: string
+  cateId: mongoose.Schema.Types.ObjectId
   @ApiPropertyOptional({ description: '录入方式 类型 1 input 2 textarea 3 select' })
   @IsNotEmpty({ message: '录入方式不能为空' })
   attrType: string

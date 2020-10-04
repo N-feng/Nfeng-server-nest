@@ -4,23 +4,23 @@ const d = new Date();
 
 export class GoodsAttr {
   @prop()
-  goodsId: mongoose.Schema.Types.ObjectId
+  goodsId?: mongoose.Schema.Types.ObjectId
    // 备用字段 开始
   @prop()
-  goodsCateId: mongoose.Schema.Types.ObjectId
+  goodsCateId?: mongoose.Schema.Types.ObjectId
   @prop()
-  attributeCateId: mongoose.Schema.Types.ObjectId
+  attributeCateId?: mongoose.Schema.Types.ObjectId
   @prop()
-  attributeId: mongoose.Schema.Types.ObjectId
+  attributeId?: mongoose.Schema.Types.ObjectId
   @prop()
-  attributeType: string
+  attributeType?: string
    // 备用字段 结束
   @prop()
-  attributeTitle: string
+  attributeTitle?: string
   @prop()
-  attributeValue: string
+  attributeValue?: string
   @prop({ default: 1 })
-  status: number
+  status?: number
   @prop({ default: d.getTime() })
-  createAt: number
+  createAt?: number
 }

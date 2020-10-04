@@ -3,13 +3,13 @@ import * as mongoose from 'mongoose';
 
 export class CreateGoodsAttrDto {
   @ApiPropertyOptional({ description: '商品ID' })
-  goodsId?: string
+  goodsId?: mongoose.Schema.Types.ObjectId
   @ApiPropertyOptional({ description: '商品分类ID' })
   goodsCateId?: mongoose.Schema.Types.ObjectId
   @ApiPropertyOptional({ description: '商品类型属性分类ID' })
-  attributeCateId?: string
+  attributeCateId?: mongoose.Schema.Types.ObjectId
   @ApiPropertyOptional({ description: '商品类型属性ID' })
-  attributeId?: string
+  attributeId?: mongoose.Schema.Types.ObjectId
   @ApiPropertyOptional({ description: '商品类型属性类型' })
   attributeType?: string
   @ApiPropertyOptional({ description: '商品类型属性名称' })

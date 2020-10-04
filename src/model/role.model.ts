@@ -3,11 +3,11 @@ const d = new Date()
 
 export class Role {
   @prop()
-  title: string
+  title?: string
   @prop()
   description: string
   @prop()
-  status: string
+  status?: string
   @prop({default: d.getTime()})
-  createAt: number
+  createAt?: number
 }

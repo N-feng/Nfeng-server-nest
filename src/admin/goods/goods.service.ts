@@ -24,7 +24,7 @@ export class GoodsService {
     return await this.goodsModel.create(body)
   }
 
-  async update(id: string, body: CreateGoodsDto) {
+  async update(id, body: CreateGoodsDto) {
     return await this.goodsModel.findByIdAndUpdate({_id: id}, body)
   }
 

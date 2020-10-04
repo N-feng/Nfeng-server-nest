@@ -3,8 +3,6 @@ import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from '@typegoose/typegoose/lib/types';
 import { GoodsImage as GoodsImageModel } from '../../model/goods_image.model';
 import { CreateGoodsImageDto } from './dto/goods_image.dto';
-import * as mongoose from 'mongoose';
-const { ObjectId } = mongoose.Types;
 
 @Injectable()
 export class GoodsImageService {

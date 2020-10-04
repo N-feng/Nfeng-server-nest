@@ -1,8 +1,9 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
+import * as mongoose from 'mongoose';
 
 export class CreateGoodsImageDto {
   @ApiPropertyOptional({ description: '商品ID' })
-  goodsId: string
+  goodsId: mongoose.Schema.Types.ObjectId
   @ApiPropertyOptional({ description: '图片地址' })
   imgUrl: string
   // @ApiPropertyOptional({ description: '图片颜色' })
@@ -12,5 +13,5 @@ export class CreateGoodsImageDto {
   // @ApiPropertyOptional({ description: '商品状态' })
   // state: number
   // @ApiPropertyOptional({ description: '增加时间' })
-  // createAt: number
+  // createAt?: number
 }

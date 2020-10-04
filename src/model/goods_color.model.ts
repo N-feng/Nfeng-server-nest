@@ -6,5 +6,5 @@ export class GoodsColor {
   @prop()
   colorValue: string
   @prop({ default: 1 })
-  status: number
+  status?: number
 }

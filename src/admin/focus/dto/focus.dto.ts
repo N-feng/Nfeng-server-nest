@@ -18,5 +18,5 @@ export class CreateFocusDto {
   @ApiPropertyOptional({ description: '排序', example: 100 })
   sort: number
   @ApiPropertyOptional({ description: '状态' })
-  status: number
+  status?: number
 }

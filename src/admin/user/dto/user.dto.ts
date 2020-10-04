@@ -1,4 +1,5 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
+import * as mongoose from 'mongoose';
 
 export class CreateUserDto {
   @ApiPropertyOptional({ description: '用户名称' })
@@ -10,5 +11,5 @@ export class CreateUserDto {
   @ApiPropertyOptional({ description: '用户邮箱' })
   email: string
   @ApiPropertyOptional({ description: '用户角色' })
-  roleId: string
+  roleId: mongoose.Schema.Types.ObjectId
 }

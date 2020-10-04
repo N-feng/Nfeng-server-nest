@@ -5,11 +5,16 @@ import { AdminModule } from './admin/admin.module';
 import { AdminauthMiddleware } from './middleware/adminauth.middleware';
 import { InitMiddleware } from './middleware/init.middleware';
 import { Config } from './config/config';
+import { DbModule } from '@libs/db';
 
 @Module({
   imports: [
+    DbModule,
     TypegooseModule.forRoot("mongodb://blogadmin:123456@localhost:27017/nest-blog-api", {
-      useNewUrlParser: true
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false
     }),
     PostsModule,
     AdminModule

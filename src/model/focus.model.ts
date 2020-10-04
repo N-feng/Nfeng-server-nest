@@ -13,7 +13,7 @@ export class Focus {
   @prop()
   sort: number
   @prop({ default: 1 })
-  status: number
+  status?: number
   @prop({ default: d.getTime() })
-  createAt: number
+  createAt?: number
 }

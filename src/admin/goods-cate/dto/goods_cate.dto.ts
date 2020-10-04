@@ -1,5 +1,6 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
+import * as mongoose from 'mongoose';
 
 export class CreateGoodsCateDto {
   @ApiPropertyOptional({ description: '商品分类ID' })
@@ -9,7 +10,7 @@ export class CreateGoodsCateDto {
   title: string
   @ApiPropertyOptional({ description: '上级分类', example: '0' })
   @IsNotEmpty({ message: '上级分类不能为空' })
-  pid: string
+  pid: mongoose.Schema.Types.ObjectId
   @ApiPropertyOptional({ description: '分类图片' })
   cateImg: string
   @ApiPropertyOptional({ description: '跳转地址' })
@@ -26,5 +27,5 @@ export class CreateGoodsCateDto {
   @IsNotEmpty({ message: '排序不能为空' })
   sort: number
   @ApiPropertyOptional({ description: '状态' })
-  status: number
+  status?: number
 }

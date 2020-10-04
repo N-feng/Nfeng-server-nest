@@ -3,8 +3,8 @@ import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from '@typegoose/typegoose/lib/types';
 import { GoodsCate as GoodsCateModel } from '../../model/goods_cate.model';
 import { CreateGoodsCateDto } from './dto/goods_cate.dto';
-import * as mongoose from 'mongoose';
-const { ObjectId } = mongoose.Types;
+// import * as mongoose from 'mongoose';
+// const { ObjectId } = mongoose.Types;
 
 @Injectable()
 export class GoodsCateService {
@@ -19,13 +19,13 @@ export class GoodsCateService {
   }
 
   async create(body: CreateGoodsCateDto) {
-    const pid = body.pid != '0' ? ObjectId(body.pid) : body.pid
-    await this.goodsCateModel.create({...body, pid })
+    // const pid = body.pid != '0' ? ObjectId(body.pid) : body.pid
+    await this.goodsCateModel.create(body)
   }
 
   async update(id: string, body: CreateGoodsCateDto) {
-    const pid = body.pid != '0' ? ObjectId(body.pid) : body.pid
-    return await this.goodsCateModel.findByIdAndUpdate({_id: id}, {...body, pid})
+    // const pid = body.pid != '0' ? ObjectId(body.pid) : body.pid
+    return await this.goodsCateModel.findByIdAndUpdate({_id: id}, body)
   }
 
   async delete(id: string) {

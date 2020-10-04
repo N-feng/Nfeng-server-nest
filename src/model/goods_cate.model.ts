@@ -20,9 +20,9 @@ export class GoodsCate {
   @prop()
   description: string
   @prop({ default: 1 })
-  status: number
+  status?: number
   @prop({ default: 100 })
   sort: number
   @prop({ default: d.getTime() })
-  createAt: number
+  createAt?: number
 }

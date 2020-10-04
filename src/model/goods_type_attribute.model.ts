@@ -12,7 +12,7 @@ export class GoodsTypeAttribute {
   @prop()
   attrValue: string // 默认值 input textarea 默认值是空 select框有默认值 多个默认值以回车隔开
   @prop({ default: 1 })
-  status: number
+  status?: number
   @prop({ default: d.getTime() })
-  createAt: number
+  createAt?: number
 }

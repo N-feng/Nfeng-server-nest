@@ -12,5 +12,5 @@ export class CreateGoodsColorDto {
   colorValue: string
   @ApiPropertyOptional({ description: '商品颜色状态', example: 1 })
   // @IsNotEmpty({ message: '商品颜色状态不能为空' })
-  status: number
+  status?: number
 }

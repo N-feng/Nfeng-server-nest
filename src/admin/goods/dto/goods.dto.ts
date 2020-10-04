@@ -1,8 +1,9 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
+import * as mongoose from 'mongoose';
 
 export class CreateGoodsDto {
   @ApiPropertyOptional({ description: '商品ID' })
-  id?: string
+  id?: mongoose.Schema.Types.ObjectId
   @ApiPropertyOptional({ description: '商品名称' })
   title: string
   @ApiPropertyOptional({ description: '二级标题' })
@@ -10,7 +11,7 @@ export class CreateGoodsDto {
   @ApiPropertyOptional({ description: '货号' })
   goodsSn: string
   @ApiPropertyOptional({ description: '商品分类' })
-  goodsCateId: string
+  goodsCateId: mongoose.Schema.Types.ObjectId
   @ApiPropertyOptional({ description: '点击数量' })
   clickCount: number
   @ApiPropertyOptional({ description: '商品库存' })
@@ -50,15 +51,15 @@ export class CreateGoodsDto {
   @ApiPropertyOptional({ description: '是否最新商品' })
   isLatest: number
   @ApiPropertyOptional({ description: '商品类型' })
-  goodsTypeId: string
+  goodsTypeId: mongoose.Schema.Types.ObjectId
   @ApiPropertyOptional({ description: '商品状态' })
-  state: number
+  status?: number
   @ApiPropertyOptional({ description: '增加时间' })
-  createAt: number
+  createAt?: number
   @ApiPropertyOptional({ description: '商品图库' })
   goodsImageList?: string[]
   @ApiPropertyOptional({ description: '商品类型id' })
-  attrIdList?: string[]
+  attrIdList?: mongoose.Schema.Types.ObjectId[]
   @ApiPropertyOptional({ description: '商品类型值' })
   attrValueList?: string[]
 }

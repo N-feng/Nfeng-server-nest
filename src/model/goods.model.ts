@@ -52,7 +52,7 @@ export class Goods {
   @prop()
   goodsTypeId: mongoose.Schema.Types.ObjectId
   @prop({ default: 1 })
-  status: number
+  status?: number
   @prop({ default: d.getTime() })
-  createAt: number
+  createAt?: number
 }

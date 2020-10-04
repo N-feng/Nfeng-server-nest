@@ -18,7 +18,7 @@ export class Access {
   @prop()
   description: string
   @prop({ default: 1 })
-  status: number
+  status?: number
   @prop({ default: d.getTime() })
-  createAt: number
+  createAt?: number
 }
