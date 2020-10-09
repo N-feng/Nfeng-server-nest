@@ -10,15 +10,20 @@ const models = TypegooseModule.forFeature([User, Course, Episode])
 @Global()
 @Module({
   imports: [
-    TypegooseModule.forRoot('mongodb://blogadmin:123456@localhost:27017/nest-blog-api', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false
+    TypegooseModule.forRootAsync({
+      useFactory() {
+        return {
+          uri: process.env.DB,
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+          useCreateIndex: true,
+          useFindAndModify: false
+        }
+      }
     }),
     models,
   ],
   providers: [DbService],
   exports: [DbService, models],
 })
-export class DbModule {}
+export class DbModule { }
