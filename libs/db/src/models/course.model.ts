@@ -22,5 +22,5 @@ export class Course {
     foreignField: 'course',
     localField: '_id',
   })
-  public episodes: Ref<Episode>[];
+  episodes: Ref<Episode>[];
 }

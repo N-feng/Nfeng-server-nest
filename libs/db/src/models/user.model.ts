@@ -1,5 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { modelOptions, prop } from '@typegoose/typegoose'
+import { DocumentType, modelOptions, prop } from '@typegoose/typegoose'
+import { hashSync } from 'bcryptjs'
+
+export type UserDocument = DocumentType<User>;
 
 @modelOptions({
     schemaOptions: {
@@ -12,6 +15,14 @@ export class User {
     username: string
 
     @ApiProperty({ description: '密码', example: 'pass1' })
-    @prop()
+    @prop({
+        select: false,
+        get(val) {
+            return val
+        },
+        set(val) {
+            return val ? hashSync(val) : val
+        }
+    })
     password: string
 }
