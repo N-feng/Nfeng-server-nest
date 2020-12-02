@@ -1,0 +1,19 @@
+type Nav {
+  id: Int
+  title: String
+  url: String
+}
+type Query {
+  hello: String
+  findNav(id: Int): Nav
+  navs: [Nav]
+}
+
+input InputNav {
+  title: String
+  url: String
+}
+
+type Mutation {
+  addNav(nav: InputNav): Nav
+}
