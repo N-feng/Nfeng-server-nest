@@ -18,7 +18,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./apps/server/test/jest-e2e.json",
-    "admin": "nest start -w admin"
+    "admin": "nest start -w admin",
+    "server": "nest start -w server"
   },
   "dependencies": {
     "@nestjs/common": "^7.5.5",
