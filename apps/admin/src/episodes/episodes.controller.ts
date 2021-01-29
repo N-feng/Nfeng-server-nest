@@ -1,3 +1,9 @@
+/*
+ * @Date: 2021-01-25 10:05:27
+ * @LastEditors: N-feng
+ * @LastEditTime: 2021-01-27 14:52:21
+ * @FilePath: /nfeng-server-nest/apps/admin/src/episodes/episodes.controller.ts
+ */
 import { Episode } from "@libs/db/models/episode.model";
 import { Controller, Get } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
@@ -5,6 +11,7 @@ import { ReturnModelType } from "@typegoose/typegoose";
 import { InjectModel } from "nestjs-typegoose";
 import { Crud } from "nestjs-mongoose-crud";
 import { Course } from "@libs/db/models/course.model";
+import { EpisodesService } from './episodes.service';
 
 @Crud({
   model: Episode,
@@ -16,7 +23,8 @@ export class EpisodesController {
     @InjectModel(Episode)
     private readonly model: ReturnModelType<typeof Episode>,
     @InjectModel(Course)
-    private readonly courseModel: ReturnModelType<typeof Course>
+    private readonly courseModel: ReturnModelType<typeof Course>,
+    private episoderService: EpisodesService
   ) {}
 
   @Get("option")
@@ -42,5 +50,15 @@ export class EpisodesController {
         },
       ],
     };
+  }
+
+  @Get('page')
+  async page() {
+    // 分页
+    const pageSize = 10;
+    const list = await this.episoderService.find({});
+    const count = await this.episoderService.count();
+    const total = Math.ceil(count / pageSize)
+    return { code: 0, data: { list, total } }
   }
 }

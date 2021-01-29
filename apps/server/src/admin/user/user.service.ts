@@ -1,3 +1,9 @@
+/*
+ * @Date: 2021-01-25 10:05:27
+ * @LastEditors: N-feng
+ * @LastEditTime: 2021-01-27 14:41:08
+ * @FilePath: /nfeng-server-nest/apps/server/src/admin/user/user.service.ts
+ */
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from '@typegoose/typegoose/lib/types';

@@ -1,3 +1,9 @@
+/*
+ * @Date: 2021-01-25 10:05:27
+ * @LastEditors: N-feng
+ * @LastEditTime: 2021-01-27 14:50:41
+ * @FilePath: /nfeng-server-nest/apps/server/src/admin/role/role.service.ts
+ */
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from '@typegoose/typegoose/lib/types';

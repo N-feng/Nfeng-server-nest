@@ -1,3 +1,9 @@
+/*
+ * @Date: 2021-01-25 10:05:27
+ * @LastEditors: N-feng
+ * @LastEditTime: 2021-01-27 14:49:29
+ * @FilePath: /nfeng-server-nest/apps/server/src/admin/role/role.controller.ts
+ */
 import { Controller, Post, Delete, Body, Param } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { RoleService } from './role.service';
